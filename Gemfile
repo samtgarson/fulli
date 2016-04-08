@@ -1,14 +1,18 @@
 source 'https://rubygems.org'
 
 gem 'autoprefixer-rails'
+gem 'ancestry'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-auth0'
+gem 'paperclip'
 gem 'pg', '~> 0.15'
 gem 'puma'
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
+gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
