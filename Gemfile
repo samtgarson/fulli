@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'autoprefixer-rails'
 gem 'ancestry'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'friendly_id', '~> 5.1.0'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-auth0'
@@ -16,9 +17,9 @@ gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'pry-rails'
+  gem 'dotenv-rails'
   gem 'pry-byebug'
-  gem 'dotenv'
+  gem 'pry-rails'
   gem 'quiet_assets'
 end
 

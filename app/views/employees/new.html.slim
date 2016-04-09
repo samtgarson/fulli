@@ -1,0 +1,7 @@
+= simple_form_for [organisation, @employee] do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :date_joined, as: :date, order: [:day, :month, :year]
+  = f.input :title
+  = f.file_field :avatar
+  = f.submit
