@@ -6,8 +6,8 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body
-    = render 'components/header'
-    section
-      .row
-        = yield
+  body class=body_class
+    == render 'components/header'
+    == render 'components/flashes' if flash.any?
+    = yield
+    == render 'components/footer'

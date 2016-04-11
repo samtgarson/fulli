@@ -1,10 +1,31 @@
 #header
-  background-color: white
+  +primary-gradient
+  color: white
+
+  h1 
+    +alt-font
+    display: inline-block
 
 #nav
   float: right
   padding: 0
+  margin: 0
 
   li
     list-style-type: none
     display: inline-block
+    margin-left: 20px
+
+    a
+      color: white
+      opacity: .8
+
+    &.active a 
+      font-weight: bold
+
+    .btn
+      margin: 0
+      font-weight: normal
+      text-transform: none
+      letter-spacing: 0
+      font-size: 1em

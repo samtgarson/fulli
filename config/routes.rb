@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  get '/', to: 'application#login'
-  get '/signup', to: 'organisations#new'
+  devise_for :users
+  get '/', to: 'application#home'
 
+  # devise_for :users
   resources :users
   resources :organisations, path: '/app', only: [:index, :new, :show, :create] do
     resources :employees
   end
 
-  root 'application#login'
+  root 'application#home'
 end
