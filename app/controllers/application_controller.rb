@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find_by(email: session[:user_email])
+    @current_user ||= User.find_by(email: session[:user_email]).decorate
   end
   helper_method :current_user
 end

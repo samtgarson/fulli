@@ -2,18 +2,3 @@
   =link_to 'Login', organisations_path
 - else
   button onclick="window.signin();" Login
-
-script src="https://cdn.auth0.com/js/lock-9.0.min.js"
-javascript:
-  var lock = new Auth0Lock("#{ENV['AUTH0_CLIENT_ID']}", "#{ENV['AUTH0_NAMESPACE']}");
-   
-  function signin() {
-    lock.show({
-      callbackURL: "#{auth0_callback_url}", 
-      responseType: 'code', 
-      disableSignupAction: true,
-      authParams: {
-        scope: 'openid profile'
-      }
-    });
-  }

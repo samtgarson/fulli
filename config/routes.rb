@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'auth0/callback', as: :auth0_callback
-  get 'auth0/failure'
-
   get '/', to: 'application#login'
   get '/signup', to: 'organisations#new'
 
