@@ -15,11 +15,11 @@ module NavHelper
     current_user ? user_nav : anon_nav
   end
 
-  def admin_nav
+  def user_nav
     {
       orgs: { path: organisations_path },
-      account: { path: user_path(current_user) },
-      logout: { path: destroy_user_session_path }
+      account: { path: edit_user_registration_path },
+      logout: { path: destroy_user_session_path, options: { method: :delete } }
     }
   end
 

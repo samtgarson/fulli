@@ -2,11 +2,12 @@
   input
     width: 100%
     display: block
-    padding: 10px 
+    padding: 15px 
     border-radius: 3px
-    margin: 5px 0 30px
+    margin: 5px 0 40px
     border: 0
     background-color: $secondary
+    border: 1px solid $secondary
     outline: none
     +main-font
 
@@ -27,6 +28,16 @@
     float: right
     opacity: .5
     font-size: 0.8em 
+
+  .error
+    +alt-font
+    font-size: .8em
+    margin-left: 5px
+    color: $primary-2
+
+  &.field_with_errors input
+    border-color: $primary-2
+
 
 .btn
   display: inline-block
@@ -56,8 +67,17 @@
 
 .form__links
   padding: 0
-  margin: 15 0
+  margin: 40px 0 60px
   text-align: center
+
+  &.danger
+    background-color: rgba($primary-2, .1)
+    border-radius: 3px
+    color: $primary-2
+    +pad
+
+    a
+      color: $primary-2
 
   li
     list-style-type: none

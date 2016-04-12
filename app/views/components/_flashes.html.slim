@@ -1,5 +1,4 @@
-section
-  .row
-    - flash.each do |key, value|
-      div class="flash flash-#{key}" 
-        span=value
+.flash-wrapper
+  - flash.each do |key, value|
+    div class="flash flash-#{key}" 
+      span=value

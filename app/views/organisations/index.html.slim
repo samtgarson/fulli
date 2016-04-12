@@ -1,3 +1,7 @@
-h1 Your Organisations
-- @organisations.each do |org|
-  = link_to org.name, org
+section
+  .row
+    h2 Your Organisations
+    - @organisations.each do |org|
+      = link_to org.name, org
+    - if @organisations.empty?
+      p.centered You don't have any organisations yet, add one to get started

@@ -6,6 +6,7 @@ class CreateTables < ActiveRecord::Migration
       t.string :name
       t.boolean :admin, default: false, null: false
       t.string :email
+      t.attachment :avatar
       t.timestamps null: false
     end
     add_index :users, :email, unique: true

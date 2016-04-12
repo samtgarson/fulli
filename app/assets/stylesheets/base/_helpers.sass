@@ -1,5 +1,6 @@
 =primary-gradient
-  +linear-gradient(to right, $primary-1, $primary-2, $primary-3)
+  +background-image(linear-gradient(to right, $primary-1, $primary-2, $primary-3), image-url('bg.png'))
+  background-blend-mode: multiply
 
 .gradient
   +primary-gradient

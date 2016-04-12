@@ -1,12 +1,20 @@
-.flash
-  border-radius: 3px
-  background-color: $secondary
-  width: 400px
-  max-width: 90%
+.flash-wrapper
+  +primary-gradient
+  opacity: 0.9
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  padding: 20px
   text-align: center
+  display: none
+
+.flash
   margin: 0 auto
+  max-width: 500px
   padding: 15px
   +alt-font
+  color: white
   font-size: .8em
 
 .flash-alert span::before
