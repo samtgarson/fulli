@@ -1,14 +1,5 @@
 = render 'components/profile', user: @employee
 section
   .row
-    = simple_form_for [organisation, @employee] do |f|
-      = f.input :name
-      = f.input :title
-      = f.input :date_joined, 
-        as: :date, 
-        order: [:day, :month, :year], 
-        start_year: Date.today.year - 50,
-        end_year: Date.today.year
-      = f.input :avatar, as: :file
-      = f.button :submit
+      = render 'form'
       = render 'components/back_button', url: organisation_path(organisation), label: organisation.name

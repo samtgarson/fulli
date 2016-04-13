@@ -10,6 +10,24 @@ class Employee < ActiveRecord::Base
   validates :avatar, attachment_presence: true
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
 
+  include PgSearch
+  pg_search_scope(
+    :query_search,
+    against: %i(
+      name
+      title
+    ),
+    using: {
+      tsearch: {
+        dictionary: "english",
+        prefix: true
+      }
+    }
+  )
+
+  scope :search, -> (q) { q.empty? ? order(:name) : query_search(q) }
+  scope :all_except, -> (id) { id.empty? ? order(:name) : where.not(id: id) }
+
   def slug_candidates
     [
       :name,
@@ -17,4 +35,12 @@ class Employee < ActiveRecord::Base
     ]
   end
 
+  def as_json(_options = {})
+    {
+      name: name,
+      title: title,
+      avatar_url: avatar.url,
+      id: id
+    }
+  end
 end

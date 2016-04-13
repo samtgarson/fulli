@@ -18,7 +18,8 @@
     width: auto
     margin-left: 20px
 
-  &.date
+  &.date, 
+  &.select
     padding: 15px 
     border-radius: 3px
     margin: 5px 0 40px
@@ -26,10 +27,8 @@
     border: 1px solid $secondary
     margin-top: 60px
     position: relative
-    display: flex
 
     select
-      flex: 1 1 33%
       border: 0
       +main-font
       background-color: transparent
@@ -38,8 +37,13 @@
       &:focus
         color: $primary-1
 
-      &:not(:first-of-type):not(:last-of-type) 
-        margin: 0 20px
+    &.date 
+      display: flex
+      
+      select
+        flex: 1 1 33%
+        &:not(:first-of-type):not(:last-of-type) 
+          margin: 0 20px
 
     label
       position: absolute
@@ -80,6 +84,7 @@
   +alt-font
   transition: .2s all ease
   cursor: pointer
+  outline: none
 
   &:hover
     background-color: darken($primary-2, 10%)

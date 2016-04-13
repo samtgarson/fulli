@@ -25,4 +25,13 @@ class ApplicationController < ActionController::Base
       u.permit(:email, :password, :password_confirmation, :name, :avatar)
     end
   end
+
+  def organisation
+    @organisation ||= if (id = params[:organisation_id] || params[:id])
+                        Organisation.friendly.find(id).decorate context: self
+                      else
+                        Organisation.new.decorate context: self
+                      end
+  end
+  helper_method :organisation
 end

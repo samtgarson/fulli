@@ -1,11 +1,14 @@
 class EmployeesController < ApplicationController
+  def index
+    @search = EmployeeSearch.new(params.permit(:query, :organisation_id, :page, :per))
+  end
 
   def new
-    @employee = Employee.new(organisation: organisation)
+    @employee = Employee.new(organisation: organisation).decorate context: self
   end
 
   def create
-    @employee = organisation.employees.create(employee_params)
+    @employee = organisation.employees.create(employee_params).decorate context: self
     if @employee.valid?
       redirect_to organisation_path(organisation)
     else
@@ -18,12 +21,13 @@ class EmployeesController < ApplicationController
   end
 
   def edit
-    @employee = Employee.find(params[:id])
+    @employee = Employee.find(params[:id]).decorate context: self
   end
 
   def update
-    @employee = Employee.friendly.find(params[:id])
+    @employee = Employee.friendly.find(params[:id]).decorate context: self
     @employee.update_attributes(employee_params)
+
     if @employee.valid?
       flash[:notice] = "#{@employee.name} successfully updated."
       redirect_to organisation_path(organisation)
@@ -34,12 +38,7 @@ class EmployeesController < ApplicationController
 
   private
 
-  def organisation
-    @organisation ||= Organisation.find_by slug: params[:organisation_id]
-  end
-  helper_method :organisation
-
   def employee_params
-    params.require(:employee).permit(:name, :title, :date_joined, :avatar)
+    params.require(:employee).permit(:name, :title, :date_joined, :avatar, :parent_id)
   end
 end

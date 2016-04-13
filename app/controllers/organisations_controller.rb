@@ -35,15 +35,6 @@ class OrganisationsController < ApplicationController
 
   private
 
-  def organisation
-    if params[:id]
-      @organisation ||= Organisation.friendly.find(params[:id])
-    else
-      @organisation ||= Organisation.new
-    end
-  end
-  helper_method :organisation
-
   def org_params
     params.require(:organisation).permit(:name, :url, allowed_domains: [])
   end
