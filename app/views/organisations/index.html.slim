@@ -1,7 +1,20 @@
 section
-  .row
+  .row.centered
     h2 Your Organisations
-    - @organisations.each do |org|
-      = link_to org.name, org
     - if @organisations.empty?
-      p.centered You don't have any organisations yet, add one to get started
+      p You don't have any organisations yet, add one to get started
+    - else
+      table
+        tr
+          th Name
+          th Employees
+          th
+        - @organisations.each do |org|
+          tr data-link=organisation_path(org)
+            td = org.name
+            td = org.employees.count
+            td.hover →
+
+      = paginate @organisations
+
+    = link_to '+ New Organisation', new_organisation_path, class: "btn#{' inline' unless @organisations.any?}"

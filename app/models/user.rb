@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
-  has_and_belongs_to_many :organisations
+  has_many :organisations, through: :associations
+  has_many :associations
 
   friendly_id :slug_candidates, use: :slugged
 

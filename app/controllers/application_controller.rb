@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def page
+    (params[:page] || 1).to_i
+  end
+
   def after_sign_in_path_for(resource)
     if request.referer == new_user_session_url || new_user_registration_url
       organisations_path

@@ -14,7 +14,22 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    redirect_to edit_organisation_employee_path(organisation, params[:id])
+  end
+
+  def edit
     @employee = Employee.find(params[:id])
+  end
+
+  def update
+    @employee = Employee.friendly.find(params[:id])
+    @employee.update_attributes(employee_params)
+    if @employee.valid?
+      flash[:notice] = "#{@employee.name} successfully updated."
+      redirect_to organisation_path(organisation)
+    else
+      render :edit
+    end
   end
 
   private

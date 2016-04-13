@@ -1,0 +1,12 @@
+section
+  .row
+    h2 Edit #{organisation.name}
+    = simple_form_for organisation do |f|
+      = f.input :name, required: true
+      = f.input :url, type: :url
+      = f.button :submit
+      .danger.form__links
+        h2 Danger Zone
+        p = link_to "Delete #{organisation.name}", organisation_path(organisation), data: { confirm: "Are you sure?" }, method: :delete
+        
+      = render 'components/back_button', url: organisation_path(organisation), label: organisation.name

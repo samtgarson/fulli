@@ -1,6 +1,6 @@
+= render 'components/profile', user: @employee
 section
   .row
-    h2 New Employee for #{organisation.name}
     = simple_form_for [organisation, @employee] do |f|
       = f.input :name
       = f.input :title
@@ -11,4 +11,4 @@ section
         end_year: Date.today.year
       = f.input :avatar, as: :file
       = f.button :submit
-      = render 'components/back_button', url: organisations_path
+      = render 'components/back_button', url: organisation_path(organisation), label: organisation.name

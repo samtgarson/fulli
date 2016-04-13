@@ -1,0 +1,35 @@
+table
+  width: 100%
+  border-collapse: collapse
+  margin: 40px 0
+
+  tr.clickable
+    cursor: pointer
+
+  tr:not(:last-child) 
+    td, 
+    th
+      border-bottom: 1px solid rgba($primary-2, 0.1)
+
+  th, td
+    text-align: left
+    padding: 20px 0
+
+    &.hover
+      opacity: 0
+      transition: 0.1s opacity ease
+
+    &:hover ~ .hover,
+    &.hover:hover
+      opacity: 1
+
+    &.avatar
+      img
+        height: 30px
+        width: 30px
+        border-radius: 25px
+
+  th
+    +alt-font
+    font-size: 0.8em
+    opacity: .5

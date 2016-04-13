@@ -2,11 +2,10 @@ class OrganisationsController < ApplicationController
   skip_before_action :check_for_org, only: [:new, :create]
 
   def index
-    @organisations = current_user.organisations
+    @organisations = current_user.organisations.page(page)
   end
 
   def new
-    @organisation = Organisation.new
   end
 
   def create
@@ -18,14 +17,34 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    organisation.update_attributes(org_params)
+    if organisation.valid?
+      redirect_to organisation_path(organisation)
+    else
+      render :edit
+    end
+  end
+
+  def show
+    @employees = organisation.employees.order(:name).page(page)
+  end
+
   private
 
   def organisation
-    @organisation ||= Organisation.find_by slug: params[:id]
+    if params[:id]
+      @organisation ||= Organisation.friendly.find(params[:id])
+    else
+      @organisation ||= Organisation.new
+    end
   end
   helper_method :organisation
 
   def org_params
-    params.require(:organisation).permit(:name, :slug, allowed_domains: [])
+    params.require(:organisation).permit(:name, :url, allowed_domains: [])
   end
 end

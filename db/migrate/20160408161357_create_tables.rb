@@ -6,6 +6,7 @@ class CreateTables < ActiveRecord::Migration
       t.string :name
       t.boolean :admin, default: false, null: false
       t.string :email
+      t.string :slug
       t.attachment :avatar
       t.timestamps null: false
     end
@@ -22,14 +23,16 @@ class CreateTables < ActiveRecord::Migration
     end
     add_index :employees, :ancestry
 
-    create_table :organisations_users, id: false do |t|
+    create_table :associations, id: false do |t|
+      t.boolean :admin
       t.references :user, type: :uuid, index: true
       t.references :organisation, type: :uuid, index: true
     end
-    add_index :organisations_users, [:user_id, :organisation_id], unique: true
+    add_index :associations, [:user_id, :organisation_id], unique: true
 
     create_table :organisations, id: :uuid do |t|
       t.string :name
+      t.string :url
       t.string :allowed_domains, array: true, default: []
       t.string :slug
       t.timestamps null: false

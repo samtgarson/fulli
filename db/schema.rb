@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412163921) do
+ActiveRecord::Schema.define(version: 20160411182410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "associations", id: false, force: :cascade do |t|
+    t.boolean "admin"
+    t.uuid    "user_id"
+    t.uuid    "organisation_id"
+  end
+
+  add_index "associations", ["organisation_id"], name: "index_associations_on_organisation_id", using: :btree
+  add_index "associations", ["user_id", "organisation_id"], name: "index_associations_on_user_id_and_organisation_id", unique: true, using: :btree
+  add_index "associations", ["user_id"], name: "index_associations_on_user_id", using: :btree
 
   create_table "employees", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +59,7 @@ ActiveRecord::Schema.define(version: 20160412163921) do
 
   create_table "organisations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
+    t.string   "url"
     t.string   "allowed_domains", default: [],              array: true
     t.string   "slug"
     t.datetime "created_at",                   null: false
@@ -57,19 +68,11 @@ ActiveRecord::Schema.define(version: 20160412163921) do
 
   add_index "organisations", ["slug"], name: "index_organisations_on_slug", unique: true, using: :btree
 
-  create_table "organisations_users", id: false, force: :cascade do |t|
-    t.uuid "user_id"
-    t.uuid "organisation_id"
-  end
-
-  add_index "organisations_users", ["organisation_id"], name: "index_organisations_users_on_organisation_id", using: :btree
-  add_index "organisations_users", ["user_id", "organisation_id"], name: "index_organisations_users_on_user_id_and_organisation_id", unique: true, using: :btree
-  add_index "organisations_users", ["user_id"], name: "index_organisations_users_on_user_id", using: :btree
-
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.boolean  "admin",                  default: false, null: false
     t.string   "email"
+    t.string   "slug"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -89,7 +92,6 @@ ActiveRecord::Schema.define(version: 20160412163921) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
