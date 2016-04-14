@@ -19,14 +19,13 @@ class Employee < ActiveRecord::Base
     ),
     using: {
       tsearch: {
-        dictionary: "english",
         prefix: true
       }
     }
   )
 
-  scope :search, -> (q) { q.empty? ? order(:name) : query_search(q) }
-  scope :all_except, -> (id) { id.empty? ? order(:name) : where.not(id: id) }
+  scope :search, -> (q) { query_search(q) unless q.empty? }
+  scope :all_except, -> (id) { where.not(id: id) unless id.empty? }
 
   def slug_candidates
     [

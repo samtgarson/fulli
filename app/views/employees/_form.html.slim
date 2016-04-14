@@ -7,7 +7,7 @@
     start_year: Date.today.year - 50,
     end_year: Date.today.year
   = f.input :avatar, as: :file
-  = f.input :parent_id, label: 'Direct Manager', collection: {}, 
+  = f.input :parent_id, collection: {}, 
     input_html: @employee.parent_selector_options, 
     wrapper_html: { class: 'selectize-wrapper' }
   = f.button :submit

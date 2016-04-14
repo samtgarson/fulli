@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :organisations, path: '/app' do
-    resources :employees
+    resources :employees, except: [:index]
   end
 
   authenticated :user do

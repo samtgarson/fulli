@@ -30,7 +30,7 @@ class OrganisationsController < ApplicationController
   end
 
   def show
-    @employees = organisation.employees.order(:name).page(page)
+    @search = EmployeeSearch.new(params.permit EmployeeSearch.allowed_params).decorate context: self
   end
 
   private

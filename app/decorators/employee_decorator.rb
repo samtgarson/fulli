@@ -12,7 +12,7 @@ class EmployeeDecorator < Draper::Decorator
           },
           ajax: {
             except: id,
-            action: context.organisation_employees_path,
+            action: context.organisation_path(helpers.organisation),
             org_id: helpers.organisation.id
           }
         }

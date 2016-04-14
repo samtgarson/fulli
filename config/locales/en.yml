@@ -9,6 +9,12 @@ en:
     pagination:
       previous: ←
       next: →
+  simple_form:
+    labels:
+      employee:
+        title: Position
+        avatar: Profile Picture
+        parent_id: Direct Manager
   datetime:
     distance_in_words:
       about_x_hours:

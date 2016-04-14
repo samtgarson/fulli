@@ -1,0 +1,4 @@
+= form_tag params, remote: true, method: :get, class: 'instant-submit'
+  .input
+    = text_field_tag :query, params[:query], placeholder: 'Search'
+  = render 'employees/table', obj: obj

@@ -2,6 +2,7 @@ table
   width: 100%
   border-collapse: collapse
   margin: 40px 0
+  table-layout: fixed
 
   tr.clickable
     cursor: pointer
@@ -23,13 +24,41 @@ table
     &.hover:hover
       opacity: 1
 
+    &:last-child
+      width: 50px
+
     &.avatar
       img
         height: 30px
         width: 30px
         border-radius: 25px
+        margin-left: 10px
 
   th
     +alt-font
     font-size: 0.8em
     opacity: .5
+
+    a.active::after
+      content: '\25B2'
+      font-size: 0.6em
+      vertical-align: middle
+      margin: -2px 0 0 5px
+      display: inline-block
+
+    a.active.reverse::after
+      content: '\25BC'
+
+#employee-table
+  padding: 40px 0 20px
+
+  table
+    margin-top: 20px
+
+  td, 
+  th
+    &:first-child
+      width: 70px
+
+  #query
+    margin-bottom: 20px

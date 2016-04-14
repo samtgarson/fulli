@@ -1,0 +1,15 @@
+table
+  tr
+    th
+    th = obj.sort_link_for 'Name', 'name'
+    th = obj.sort_link_for 'Position', 'title'
+    th = obj.sort_link_for 'Joined', 'date_joined'
+    th
+  - obj.results.each do |e|
+      tr data-link=organisation_employee_path(organisation, e)
+        td.avatar = image_tag(e.avatar)
+        td = e.name
+        td = e.title
+        td = time_ago_in_words(e.date_joined).titleize + ' ago'
+        td.hover →
+= paginate obj.results, remote: true

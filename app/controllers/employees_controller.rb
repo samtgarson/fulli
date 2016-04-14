@@ -1,8 +1,4 @@
 class EmployeesController < ApplicationController
-  def index
-    @search = EmployeeSearch.new(params.permit(:query, :organisation_id, :page, :per))
-  end
-
   def new
     @employee = Employee.new(organisation: organisation).decorate context: self
   end

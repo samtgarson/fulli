@@ -1,24 +1,11 @@
 section
   .row
     h2= organisation.name
-    - if @employees.empty?
+    - if @search.results.empty?
       p You don't have any employees in #{organisation.name} yet, add one to get started
     - else
-      table
-        tr
-          th
-          th Name
-          th Title
-          th Joined
-          th
-        - @employees.each do |e|
-            tr data-link=organisation_employee_path(organisation, e)
-              td.avatar = image_tag(e.avatar)
-              td = e.name
-              td = e.title
-              td = time_ago_in_words(e.date_joined).titleize + ' ago'
-              td.hover →
-    = paginate @employees
+      .table-wrapper#employee-table
+        = render 'employees/list', obj: @search
     = link_to '+ Add a new employee', new_organisation_employee_path(organisation), class: 'btn'
     = link_to "Edit #{organisation.name}", edit_organisation_path(organisation), class: 'btn secondary'
     = render 'components/back_button', url: organisations_path, label: 'Organisations'
