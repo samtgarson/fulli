@@ -11,8 +11,7 @@ class EmployeeSearchDecorator < Draper::Decorator
 
   def path_options(attribute)
     {
-      order: attribute,
-      organisation_id: helpers.organisation.id
+      order: attribute
     }.tap do |h|
       h[:reverse] = 1 if order == attribute && reverse == 0
     end

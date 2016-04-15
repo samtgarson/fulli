@@ -19,13 +19,15 @@ class Employee < ActiveRecord::Base
     ),
     using: {
       tsearch: {
-        prefix: true
+        prefix: true,
+        start_sel: '<b>',
+        stop_sel: '</b>'
       }
     }
   )
 
-  scope :search, -> (q) { query_search(q) unless q.empty? }
-  scope :all_except, -> (id) { where.not(id: id) unless id.empty? }
+  scope :search, -> (q) { query_search(q) unless !q.nil? && q.empty? }
+  scope :all_except, -> (id) { where.not(id: id) unless !id.nil? && id.empty? }
 
   def slug_candidates
     [
@@ -39,7 +41,8 @@ class Employee < ActiveRecord::Base
       name: name,
       title: title,
       avatar_url: avatar.url,
-      id: id
+      id: id,
+      slug: slug
     }
   end
 end

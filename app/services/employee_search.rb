@@ -3,7 +3,7 @@ class EmployeeSearch
   include Draper::Decoratable
 
   attribute :query, :string, default: ''
-  attribute :id
+  attribute :id # organisation id
   attribute :page, :integer, default: 1
   attribute :per, :integer, default: 20
   attribute :order, :string, default: 'name'

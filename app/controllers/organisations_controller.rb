@@ -31,6 +31,7 @@ class OrganisationsController < ApplicationController
 
   def show
     @search = EmployeeSearch.new(params.permit EmployeeSearch.allowed_params).decorate context: self
+    params[:display] ||= 'table'
   end
 
   private

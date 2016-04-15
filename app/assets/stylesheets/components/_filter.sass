@@ -1,0 +1,30 @@
+.filter
+  +clearfix
+
+  [class*=filter]:last-of-type
+    +omega
+
+  .filter-buttons
+    +span-columns(2)
+    +icon-font
+    display: flex
+    justify-content: space-around
+
+  .filter-toggle
+    display: inline-block
+    vertical-align: middle
+    line-height: 48px
+    border-radius: 3px
+    font-size: 22px
+    height: 48px
+    width: 48px
+    background-color: $secondary
+    color: rgba(black, .5)
+    text-align: center
+    margin: 5px 0
+
+    a
+      color: rgba(black, .2)
+
+  .filter-search
+    +span-columns(10)
