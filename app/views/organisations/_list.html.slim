@@ -1,8 +1,8 @@
 = form_tag params, remote: true, method: :get, class: 'instant-submit'
   .filter
     .filter-search
-      .input
-        = text_field_tag :query, params[:query], placeholder: 'Search'
+      = content_tag :div, class:"input #{ 'disabled' if params[:display] == 'graph' }"
+        = text_field_tag :query, params[:query], placeholder: 'Search', disabled: (params[:display] == 'graph')
     .filter-buttons
       .filter-toggle = link_to_if params[:display] != 'table', 'l', {display: 'table'}, remote: true
       .filter-toggle = link_to_if params[:display] != 'graph', 'g', {display: 'graph'}, remote: true

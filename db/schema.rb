@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411182410) do
+ActiveRecord::Schema.define(version: 20160415202730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(version: 20160411182410) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.uuid     "organisation_id"
     t.string   "ancestry"
     t.string   "slug"
+    t.integer  "ancestry_depth",      default: 0
   end
 
   add_index "employees", ["ancestry"], name: "index_employees_on_ancestry", using: :btree

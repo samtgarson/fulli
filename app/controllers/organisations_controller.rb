@@ -30,8 +30,13 @@ class OrganisationsController < ApplicationController
   end
 
   def show
-    @search = EmployeeSearch.new(params.permit EmployeeSearch.allowed_params).decorate context: self
     params[:display] ||= 'table'
+    case params[:display]
+    when 'table'
+      @search = EmployeeSearch.new(params.permit EmployeeSearch.allowed_params).decorate context: self
+    when 'graph'
+      @graph = OrganisationGraph.new organisation.employees, context: self
+    end
   end
 
   private

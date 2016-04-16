@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
   belongs_to :organisation
-  has_ancestry
+  has_ancestry cache_depth: true
   has_attached_file :avatar
 
   extend FriendlyId
@@ -19,9 +19,7 @@ class Employee < ActiveRecord::Base
     ),
     using: {
       tsearch: {
-        prefix: true,
-        start_sel: '<b>',
-        stop_sel: '</b>'
+        prefix: true
       }
     }
   )
@@ -42,7 +40,6 @@ class Employee < ActiveRecord::Base
       title: title,
       avatar_url: avatar.url,
       id: id,
-      slug: slug
     }
   end
 end

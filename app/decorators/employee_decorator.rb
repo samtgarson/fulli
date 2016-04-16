@@ -19,4 +19,19 @@ class EmployeeDecorator < Draper::Decorator
       }
     }
   end
+
+  def for_graph
+    {
+      id: id,
+      label: name.upcase.chars.join(' '),
+      image: avatar.url,
+      url: context.organisation_employee_url(helpers.organisation, object)
+    }
+  end
+
+  private
+
+  def max_depth
+    Employee.maximum(:ancestry_depth)
+  end
 end

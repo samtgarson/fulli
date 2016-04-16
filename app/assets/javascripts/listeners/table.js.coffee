@@ -12,6 +12,7 @@ class @Table extends @Listener
       @el.append(body)
       InstantSubmit.bindAll()
       Table.bindAll()
+      Graph.bindAll()
     )
 
   _bindClick: =>

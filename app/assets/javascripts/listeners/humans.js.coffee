@@ -1,11 +1,7 @@
 class @Humans extends @Listener
   @className: 'humans'
   @classKey: 'Humans'
-
-  constructor: (@el) ->
-    @options = $.extend(true, {}, @_defaultOptions(), @el.data('options'))
-    super
-
+    
   instantiate: =>
     @el.selectize(@options.selectize)
 

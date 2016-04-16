@@ -1,8 +1,9 @@
 class OrganisationGraph
   attr_accessor :nodes, :edges, :scope
 
-  def initialize(scope)
+  def initialize(scope, context: {})
     @scope = scope
+    @context = context
     extract_nodes
     extract_edges
   end
@@ -10,7 +11,7 @@ class OrganisationGraph
   private
 
   def extract_nodes
-    @nodes = @scope.all.map(&:as_json)
+    @nodes = @scope.all.decorate(context: @context).map(&:for_graph)
   end
 
   def extract_edges
