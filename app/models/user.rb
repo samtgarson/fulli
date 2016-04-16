@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   has_attached_file :avatar
 
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
   has_many :organisations, through: :associations
@@ -17,6 +17,6 @@ class User < ActiveRecord::Base
     ]
   end
 
-  validates :name, :email, presence: true
+  validates :email, presence: true
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 end

@@ -4,12 +4,8 @@ section
     = simple_form_for organisation do |f|
       = f.input :name, required: true
       = f.input :url, type: :url
-      = f.input :allowed_domains, 
-        placeholder: 'e.g. yourcompany.com',
-        input_html: { class: 'basic-tags' }, 
-        wrapper_html: { class: 'select selectize-wrapper' },
-        hint: "People with these email domains will be given access"
       = f.button :submit
+      = link_to '+ Invite a new User', new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary'
       .danger.form__links
         h2 Danger Zone
         p = link_to "Delete #{organisation.name}", organisation_path(organisation), data: { confirm: "Are you sure?" }, method: :delete

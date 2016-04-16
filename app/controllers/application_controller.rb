@@ -24,6 +24,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :password, :password_confirmation, :name, :avatar)
     end
+
+    devise_parameter_sanitizer.for(:invite).concat [:name]
   end
 
   def organisation
