@@ -1,9 +1,10 @@
-.input.select.selectize-wrapper
+.input.selectize-wrapper
   padding: 0
 
 .selectize-input
   border: 0
   padding: 15px
+  height: 48px
   box-shadow: none !important
   border-radius: 3px
   background-color: transparent !important
@@ -12,14 +13,38 @@
     +main-font
 
   &.has-items
-    padding: 10px 15px
+    padding: 15px !important
+
+.humans .selectize-input
+  &.has-items
+    padding: 10px 15px !important
+
+.basic-tags 
+  .option
+    padding: 15px
+  .selectize-input
+    div.item
+      background-color: rgba(white, 0.7)
+      padding: 5px 10px
+      margin: -5px -1px
+      margin-right: 10px
+      color: $primary-2
+      font-weight: bold
+      border-radius: 3px
+
+      a.remove
+        border: 0
+        line-height: 25px
 
 .selectize-dropdown
   border: 0
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
   background: $secondary
 
-  .option
+  .selectize-dropdown-content
+    border-radius: 3px
+
+  .option, .create
     +main-font
     font-weight: bold
 
@@ -36,6 +61,9 @@
     .highlight
       font-weight: bold
       background-color: rgba($primary-3, 0.3)
+
+  .create
+    padding: 15px
 
 .selectize-dropdown,
 .selectize-input

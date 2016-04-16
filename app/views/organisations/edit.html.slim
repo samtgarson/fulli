@@ -4,6 +4,11 @@ section
     = simple_form_for organisation do |f|
       = f.input :name, required: true
       = f.input :url, type: :url
+      = f.input :allowed_domains, 
+        placeholder: 'e.g. yourcompany.com',
+        input_html: { class: 'basic-tags' }, 
+        wrapper_html: { class: 'select selectize-wrapper' },
+        hint: "People with these email domains will be given access"
       = f.button :submit
       .danger.form__links
         h2 Danger Zone

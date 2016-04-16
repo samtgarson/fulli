@@ -48,10 +48,16 @@
         &:not(:first-of-type):not(:last-of-type) 
           margin: 0 20px
 
-    label
+    label, 
+    .hint
       position: absolute
       top: -20px
       left: 0
+      margin: 0
+
+    .hint
+      left: auto
+      right: 0
 
   label 
     +alt-font
@@ -62,6 +68,7 @@
     float: right
     opacity: .5
     font-size: 0.8em 
+    margin-top: 3px
 
   .error
     +alt-font

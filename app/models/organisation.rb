@@ -9,9 +9,13 @@ class Organisation < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  def allowed_domains=(list)
+    super list.split(',')
+  end
+
   def url=(new_url)
     new_url = "http://#{new_url}" if URI(new_url).scheme.nil?
-    write_attribute(:url, new_url)
+    super new_url
   end
 
   def top_employees

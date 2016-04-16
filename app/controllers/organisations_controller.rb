@@ -42,6 +42,6 @@ class OrganisationsController < ApplicationController
   private
 
   def org_params
-    params.require(:organisation).permit(:name, :url, allowed_domains: [])
+    params.require(:organisation).permit(:name, :url, :allowed_domains)
   end
 end
