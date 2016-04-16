@@ -1,6 +1,5 @@
-class @Graph extends @Listener
-  @className: 'graph'
-  @classKey: 'Graph'
+class @Graph extends Listener
+  Listener.register @, 'graph'
 
   constructor: ->
     @vis = []

@@ -1,8 +1,19 @@
 class @Listener
-  @bindAll: ->
-    $('.' + @className).each (i, el) =>
+  @classes: []
+
+  @register: (cls, key) =>
+    if key? && key.length
+      @classes.push cls
+      cls.listener_key = key
+
+  @bindAll: (e) =>
+    for cls in @classes
+      cls.bindSelf()
+
+  @bindSelf: ->
+    $('.' + @listener_key).each (i, el) =>
       klass = @constructor
-      $(el).data(@className, new window[@classKey]($(el)))
+      $(el).data(@listener_key, new window[@name]($(el)))
 
   constructor: (@el) ->
     @options = @mergeOptions()
@@ -13,3 +24,6 @@ class @Listener
 
   _defaultOptions: => 
     {}
+
+$ ->
+  setTimeout Listener.bindAll, 0

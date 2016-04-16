@@ -1,6 +1,5 @@
-class @Table extends @Listener
-  @className: 'table-wrapper'
-  @classKey: 'Table'
+class @Table extends Listener
+  Listener.register @, 'table-wrapper'
 
   instantiate: =>
     @_bindEvents()
@@ -10,9 +9,7 @@ class @Table extends @Listener
     $('body').on('table:reload', (e, body) =>
       @el.empty()
       @el.append(body)
-      InstantSubmit.bindAll()
-      Table.bindAll()
-      Graph.bindAll()
+      Listener.bindAll()
     )
 
   _bindClick: =>
