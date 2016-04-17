@@ -4,18 +4,18 @@ section
     - if @organisations.empty?
       p You don't have any organisations yet, add one to get started
     - else
-    .table-wrapper
-      table
-        tr
-          th Name
-          th Employees
-          th
-        - @organisations.each do |org|
-          tr data-link=organisation_path(org)
-            td = org.name
-            td = org.employees.count
-            td.hover →
+      .table-wrapper
+        table
+          tr
+            th Name
+            th Employees
+            th
+          - @organisations.each do |org|
+            tr data-link=organisation_path(org)
+              td = org.name
+              td = org.employees.count
+              td.hover →
 
-      = paginate @organisations
+        = paginate @organisations
 
     = link_to '+ New Organisation', new_organisation_path, class: "btn#{' inline' unless @organisations.any?}"

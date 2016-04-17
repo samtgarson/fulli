@@ -18,7 +18,7 @@ module NavHelper
   def user_nav
     {
       orgs: { path: organisations_path },
-      account: { path: edit_user_registration_path },
+      :"#{current_user.name}" => { path: edit_user_registration_path },
       logout: { path: destroy_user_session_path, options: { method: :delete } }
     }
   end

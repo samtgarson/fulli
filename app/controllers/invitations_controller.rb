@@ -2,8 +2,17 @@ class InvitationsController < Devise::InvitationsController
 
   def create
     super do |u|
-      u.organisations << Organisation.friendly.find(params[:organisation_id])
+      u.organisations << organisation unless u.organisation_ids.include?(organisation.id)
+      redirect_to edit_organisation_path(organisation) and return if already_exists?(u)
     end
+  end
+
+  def already_exists?(u)
+    User.where(email: u.email).any?
+  end
+
+  def after_invite_path_for(user)
+    edit_organisation_path(organisation)
   end
 
 end

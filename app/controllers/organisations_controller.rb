@@ -39,7 +39,18 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  def remove_user
+    @id = selected_user.id
+    organisation.users.delete(selected_user)
+    selected_user.organisations.delete(organisation)
+    render 'users/destroy'
+  end
+
   private
+
+  def selected_user
+    User.friendly.find(params[:user_id])
+  end
 
   def org_params
     params.require(:organisation).permit(:name, :url, :allowed_domains)

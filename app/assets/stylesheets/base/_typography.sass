@@ -1,3 +1,10 @@
+@font-face
+  font-family: 'icomoon'
+  src: asset-url('icomoon.eot?of1cuk')
+  src: asset-url('icomoon.eot?of1cuk#iefix') format('embedded-opentype'), asset-url('icomoon.ttf?of1cuk') format('truetype'), asset-url('icomoon.woff?of1cuk') format('woff'), asset-url('icomoon.svg?of1cuk#icomoon') format('svg')
+  font-weight: normal
+  font-style: normal
+
 =main-font
   font-family: 'Open Sans', sans-serif
   font-size: 14px
@@ -12,6 +19,19 @@
   text-transform: uppercase
   letter-spacing: .2em
   font-weight: bold
+
+$icon-mail: "\6d"
+$icon-cog: "\63"
+$icon-square-plus: "\2b"
+$icon-square-minus: "\2d"
+$icon-share: "\67"
+$icon-arrow-left: "\25c0"
+$icon-arrow-right: "\25b6"
+$icon-arrow-up: "\25b2"
+$icon-arrow-down: "\25bc"
+$icon-trash: "\62"
+$icon-contract: "\7a"
+$icon-menu: "\6c"
 
 body
   +main-font
@@ -33,3 +53,10 @@ a
   
 p a
   text-decoration: underline
+
+.icon
+  font-family: 'icomoon'
+  font-size: 1.2em
+  vertical-align: middle
+  display: inline-block
+  margin-top: -3px

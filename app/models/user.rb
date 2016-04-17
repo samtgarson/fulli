@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
     ]
   end
 
-  validates :email, presence: true
+
+  def has_pending_invite?
+    invited_to_sign_up? && !invitation_accepted?
+  end
+
+  validates :name, :email, presence: true
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 end

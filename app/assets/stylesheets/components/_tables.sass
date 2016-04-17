@@ -4,8 +4,12 @@ table
   margin: 40px 0
   table-layout: fixed
 
-  tr.clickable
-    cursor: pointer
+  tr
+    &.clickable
+      cursor: pointer
+
+    &.faded
+      opacity: .5
 
   tr:not(:last-child) 
     td, 

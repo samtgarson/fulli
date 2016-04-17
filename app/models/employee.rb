@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  belongs_to :organisation
+  belongs_to :organisation, dependent: :destroy
   has_ancestry cache_depth: true
   has_attached_file :avatar
 
