@@ -2,6 +2,7 @@ class Employee < ActiveRecord::Base
   belongs_to :organisation, dependent: :destroy
   has_ancestry cache_depth: true
   has_attached_file :avatar
+  has_one :skill_set
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -27,6 +28,8 @@ class Employee < ActiveRecord::Base
   scope :search, -> (q) { query_search(q) unless !q.nil? && q.empty? }
   scope :all_except, -> (id) { where.not(id: id) unless !id.nil? && id.empty? }
 
+  before_create :create_skill_set
+
   def slug_candidates
     [
       :name,
@@ -41,5 +44,11 @@ class Employee < ActiveRecord::Base
       avatar_url: avatar.url,
       id: id,
     }
+  end
+
+  private
+
+  def create_skill_set
+    skill_set = SkillSet.new
   end
 end

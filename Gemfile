@@ -18,9 +18,9 @@ gem 'puma'
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
-gem 'simple_form_object'
 gem 'selectize-rails'
 gem 'slim-rails'
+gem 'slugify'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do

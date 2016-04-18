@@ -22,7 +22,8 @@
     margin-left: 20px
 
   &.date, 
-  &.select
+  &.select,
+  &.range
     padding: 15px 
     border-radius: 3px
     margin: 5px 0 40px
@@ -30,6 +31,10 @@
     border: 1px solid $secondary
     margin-top: 60px
     position: relative
+
+    input
+      margin: 0
+      padding: 0
 
     select
       border: 0
@@ -83,7 +88,7 @@
 .btn
   display: inline-block
   padding: 15px
-  margin: 10px 0
+  margin: 10px auto
   width: 100%
   border-radius: 3px
   background-color: $primary-2

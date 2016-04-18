@@ -2,4 +2,5 @@
 section
   .row
       = render 'form'
+      = link_to "#{@employee.name}'s skills and interests", edit_organisation_employee_skill_set_path(organisation, @employee), class: 'btn secondary'
       = render 'components/back_button', url: organisation_path(organisation), label: organisation.name

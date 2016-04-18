@@ -1,0 +1,3 @@
+.skill-wrapper
+  = f.input :skill, collection: Skill.all.map(&:name),input_html: { class: 'basic-tags', data: {options: {selectize: {maxItems: 1}}} }, wrapper_html: { class: 'select selectize-wrapper' }
+  = f.input :rating, as: :range, input_html: { min: 0, max: 5, step: 1 }

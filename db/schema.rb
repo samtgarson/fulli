@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416164900) do
+ActiveRecord::Schema.define(version: 20160419163919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20160416164900) do
   add_index "associations", ["organisation_id"], name: "index_associations_on_organisation_id", using: :btree
   add_index "associations", ["user_id", "organisation_id"], name: "index_associations_on_user_id_and_organisation_id", unique: true, using: :btree
   add_index "associations", ["user_id"], name: "index_associations_on_user_id", using: :btree
+
+  create_table "employee_skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "skill_set_id"
+    t.integer  "rating",       default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.uuid     "skill_id"
+  end
 
   create_table "employees", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
@@ -68,6 +76,22 @@ ActiveRecord::Schema.define(version: 20160416164900) do
   end
 
   add_index "organisations", ["slug"], name: "index_organisations_on_slug", unique: true, using: :btree
+
+  create_table "skill_sets", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "employee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "scope"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "skills", ["slug"], name: "index_skills_on_slug", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"

@@ -4,13 +4,9 @@ class @BasicTags extends Listener
   instantiate: =>
     @el.selectize(@options.selectize)
 
-  create: (input) ->
-    value: input
-    text: input
-
   _defaultOptions: =>
     selectize:
-      create: @create
+      create: true
       persist: false
       selectOnTab: true
       plugins: ['remove_button']

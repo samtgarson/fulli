@@ -8,7 +8,7 @@ class EmployeeDecorator < Draper::Decorator
         options: {
           selectize: {
             options: helpers.organisation.top_employees.all_except(id).as_json,
-            items: [(parent && parent.id)]
+            items: [(parent.id if parent)]
           },
           ajax: {
             except: id,

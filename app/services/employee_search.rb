@@ -1,19 +1,20 @@
 class EmployeeSearch
-  include SimpleFormObject
+  include Virtus.model
+  include ActiveModel::Model
   include Draper::Decoratable
 
-  attribute :query, :string, default: ''
+  attribute :query, String, default: ''
   attribute :id # organisation id
-  attribute :page, :integer, default: 1
-  attribute :per, :integer, default: 20
-  attribute :order, :string, default: 'name'
-  attribute :reverse, :integer, default: 0
-  attribute :except_id, :string, default: ''
+  attribute :page, Integer, default: 1
+  attribute :per, Integer, default: 20
+  attribute :order, String, default: 'name'
+  attribute :reverse, Integer, default: 0
+  attribute :except_id, String, default: ''
 
   validates :id, presence: true
 
   def self.allowed_params
-    _attributes.map(&:name)
+    attributes.map(&:name)
   end
 
   def results
