@@ -1,9 +1,18 @@
-.skill_sets
+.skill-wrapper
   .input.select
     +span-columns(3)
     height: 50px
 
   .input.range
-    +span-columns(9)
-    +omega
+    +span-columns(8)
     height: 50px
+
+  .btn
+    +span-columns(1)
+    +omega
+    margin-top: 60px
+
+  &:not(:first-of-type)
+    .input, 
+    .btn
+      margin-top: 0

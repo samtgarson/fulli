@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20160419163919) do
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
-    t.string   "scope"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

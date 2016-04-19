@@ -4,16 +4,17 @@ class @Listener
   @register: (cls, key) =>
     if key? && key.length
       @classes.push cls
-      cls.listener_key = key
+      cls.listenerSelector = key
 
   @bindAll: (e) =>
     for cls in @classes
       cls.bindSelf()
 
   @bindSelf: ->
-    $('.' + @listener_key).each (i, el) =>
+    $(@listenerSelector).each (i, el) =>
       klass = @constructor
-      $(el).data(@listener_key, new window[@name]($(el)))
+      if !$(el).data(@listenerSelector)?
+        $(el).data(@listenerSelector, new window[@name]($(el)))
 
   constructor: (@el) ->
     @options = @mergeOptions()

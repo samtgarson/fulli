@@ -1,5 +1,5 @@
 class @Table extends Listener
-  Listener.register @, 'table-wrapper'
+  Listener.register @, '.table-wrapper'
 
   instantiate: =>
     @_bindEvents()

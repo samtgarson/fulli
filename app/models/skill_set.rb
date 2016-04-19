@@ -3,11 +3,11 @@ class SkillSet < ActiveRecord::Base
   has_many :skills, through: :employee_skills
   belongs_to :employee
 
-  accepts_nested_attributes_for :employee_skills
+  accepts_nested_attributes_for :employee_skills, reject_if: :all_blank, allow_destroy: true
 
-  before_create :add_empty_skill
+  after_save :add_empty_skill
 
   def add_empty_skill
-    employee_skills << EmployeeSkill.new
+    employee_skills << EmployeeSkill.new if employee_skills.empty?
   end
 end

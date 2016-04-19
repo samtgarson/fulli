@@ -31,6 +31,6 @@ class SkillSetsController < ApplicationController
   helper_method :skill_set
 
   def skill_set_params
-    params.require(:skill_set).permit(employee_skills_attributes: [:skill, :rating, :id])
+    params.require(:skill_set).permit(employee_skills_attributes: [:skill, :rating, :id, :_destroy])
   end
 end

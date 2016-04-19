@@ -3,8 +3,8 @@ section
     h2 #{employee.name}'s Skills & Interests
     = simple_form_for skill_set, url: organisation_employee_skill_set_path(organisation, employee) do |f|
       = f.simple_fields_for :employee_skills do |e|
-        = render partial: 'skill', locals: {f: e}
+        = render partial: 'employee_skill_fields', locals: {f: e}
       .centered
-        = link_to '+ Add New Skill', '', class: 'inline btn secondary spacer'
+        = link_to_add_association '+ Add New Skill', f, :employee_skills, class: 'inline btn secondary spacer'
       = f.button :submit
       = render 'components/back_button', url: organisation_employee_path(organisation, employee), label: "#{employee.name}'s profile"
