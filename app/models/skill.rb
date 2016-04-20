@@ -1,6 +1,6 @@
 class Skill < ActiveRecord::Base
   has_many :employee_skills
-  has_many :skill_sets, through: :employee_skill
+  has_many :employees, through: :employee_skill
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true

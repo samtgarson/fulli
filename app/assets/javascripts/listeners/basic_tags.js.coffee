@@ -13,4 +13,4 @@ class @BasicTags extends Listener
       plugins: ['remove_button']
 
 $ =>
-  $('.edit_skill_set').on('cocoon:after-insert', => BasicTags.bindSelf())
+  $('.edit_employee').on('cocoon:after-insert', => BasicTags.bindSelf())

@@ -1,5 +1,5 @@
 class EmployeeSkill < ActiveRecord::Base
-  belongs_to :skill_set
+  belongs_to :employee
   belongs_to :skill
 
   def skill=(name)

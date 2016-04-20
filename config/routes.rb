@@ -3,9 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :organisations, path: '/app' do
-    resources :employees, except: [:index] do
-      resource :skill_set, except: [:index], path: '/skills'
-    end
+    resources :employees, except: [:index]
     delete :remove_user, on: :member, as: :remove_user
   end
 

@@ -1,7 +1,7 @@
 = render layout: 'components/profile', locals: {user: @employee}
   h2.lefted 
     span Summary
-    = link_to 'Skills', edit_organisation_employee_skill_set_path(organisation, @employee)
+    = link_to 'Skills'
 section
   .row
     = render 'form'
@@ -9,3 +9,14 @@ section
       h2 Danger Zone
       p = link_to "Delete #{@employee.name}", organisation_employee_path(organisation, @employee), data: { confirm: "Are you sure?" }, method: :delete
     = render 'components/back_button', url: organisation_path(organisation), label: organisation.name
+section
+  .row    
+    = simple_form_for @employee, url: organisation_employee_path(organisation, @employee) do |f|
+      = f.simple_fields_for :employee_skills do |e|
+        = render partial: 'employee_skill_fields', locals: {f: e}
+      .centered
+        = link_to_add_association '+ Add New Skill', f, :employee_skills, class: 'inline btn secondary spacer'
+      = f.button :button
+        span.icon t
+        | save
+      = render 'components/back_button', url: organisation_path(organisation), label: organisation.name
