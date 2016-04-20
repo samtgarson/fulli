@@ -4,23 +4,29 @@ section
     = simple_form_for organisation do |f|
       = f.input :name, required: true
       = f.input :url, type: :url
-      = f.button :submit
+      = f.button :button
+        span.icon t
+        | Save
     br /
     h2 Users
     table
       tr
+        th.avatar
         th User
         th Email
         th
       - organisation.users.each do |user|
         tr class=('faded' if user.has_pending_invite?) data-id=user.id
+          td.avatar = image_tag(user.avatar)
           td 
             - if user.has_pending_invite?
               span.icon> m
             = user.name
           td = user.email
           td = user.remove_link unless user == current_user
-    = link_to '+ Invite a new User', new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary'
+    = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary'
+      span.icon +
+      | Invite a new User
     .danger.form__links
       h2 Danger Zone
       p = link_to "Delete #{organisation.name}", organisation_path(organisation), data: { confirm: "Are you sure?" }, method: :delete

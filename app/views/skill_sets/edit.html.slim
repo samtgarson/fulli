@@ -1,10 +1,15 @@
+= render layout: 'components/profile', locals: {user: employee}
+  h2.lefted 
+    = link_to 'Summary', organisation_employee_path(organisation, employee)
+    span Skills
 section
-  .row
-    h2 #{employee.name}'s Skills & Interests
+  .row    
     = simple_form_for skill_set, url: organisation_employee_skill_set_path(organisation, employee) do |f|
       = f.simple_fields_for :employee_skills do |e|
         = render partial: 'employee_skill_fields', locals: {f: e}
       .centered
         = link_to_add_association '+ Add New Skill', f, :employee_skills, class: 'inline btn secondary spacer'
-      = f.button :submit
-      = render 'components/back_button', url: organisation_employee_path(organisation, employee), label: "#{employee.name}'s profile"
+      = f.button :button
+        span.icon t
+        | save
+      = render 'components/back_button', url: organisation_path(organisation), label: organisation.name

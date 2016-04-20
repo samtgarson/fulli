@@ -1,6 +1,11 @@
-= render 'components/profile', user: @employee
+= render layout: 'components/profile', locals: {user: @employee}
+  h2.lefted 
+    span Summary
+    = link_to 'Skills', edit_organisation_employee_skill_set_path(organisation, @employee)
 section
   .row
-      = render 'form'
-      = link_to "#{@employee.name}'s skills and interests", edit_organisation_employee_skill_set_path(organisation, @employee), class: 'btn secondary'
-      = render 'components/back_button', url: organisation_path(organisation), label: organisation.name
+    = render 'form'
+    .danger.form__links
+      h2 Danger Zone
+      p = link_to "Delete #{@employee.name}", organisation_employee_path(organisation, @employee), data: { confirm: "Are you sure?" }, method: :delete
+    = render 'components/back_button', url: organisation_path(organisation), label: organisation.name

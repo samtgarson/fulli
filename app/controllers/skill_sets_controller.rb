@@ -12,7 +12,7 @@ class SkillSetsController < ApplicationController
     success = skill_set.update_attributes(skill_set_params)
     if success
       flash[:notice] = "#{@employee.name} successfully updated."
-      redirect_to organisation_employee_path(organisation, employee)
+      redirect_to organisation_employee_skill_set_path(organisation, employee)
     else
       render :edit
     end

@@ -46,6 +46,14 @@ class OrganisationsController < ApplicationController
     render 'users/destroy'
   end
 
+  def destroy
+    if organisation.destroy
+      redirect_to current_user.organisations.any? ? organisations_path : new_organisation_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def selected_user

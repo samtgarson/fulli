@@ -1,8 +1,8 @@
 class Employee < ActiveRecord::Base
-  belongs_to :organisation, dependent: :destroy
+  belongs_to :organisation
   has_ancestry cache_depth: true
   has_attached_file :avatar
-  has_one :skill_set
+  has_one :skill_set, dependent: :destroy
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

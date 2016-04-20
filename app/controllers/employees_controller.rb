@@ -32,6 +32,15 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def destroy
+    @employee = Employee.friendly.find(params[:id])
+    if @employee.destroy
+      redirect_to organisation_path(organisation)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def employee_params

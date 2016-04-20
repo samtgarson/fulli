@@ -4,3 +4,4 @@ section.gradient.profile
 section
   .row
     h2 = local_assigns[:user].name
+    = yield if block_given?

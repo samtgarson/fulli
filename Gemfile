@@ -23,6 +23,7 @@ gem 'selectize-rails'
 gem 'slim-rails'
 gem 'slugify'
 gem 'uglifier', '>= 1.3.0'
+gem 'virtus'
 
 group :development, :test do
   gem 'dotenv-rails'

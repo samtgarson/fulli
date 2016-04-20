@@ -1,5 +1,5 @@
 class Organisation < ActiveRecord::Base
-  has_many :employees
+  has_many :employees, dependent: :destroy
   has_many :users, through: :associations
   has_many :associations
 

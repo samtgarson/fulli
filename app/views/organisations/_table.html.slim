@@ -1,6 +1,6 @@
 table
   tr
-    th
+    th.avatar
     th = obj.sort_link_for 'Name', 'name'
     th = obj.sort_link_for 'Position', 'title'
     th = obj.sort_link_for 'Joined', 'date_joined'
@@ -11,5 +11,6 @@ table
         td = e.name
         td = e.title
         td = time_ago_in_words(e.date_joined).titleize + ' ago'
-        td.hover →
+        td.hover 
+          span.icon →
 = paginate obj.results, remote: true

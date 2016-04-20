@@ -10,4 +10,6 @@
   = f.input :parent_id, collection: {}, 
     input_html: @employee.parent_selector_options, 
     wrapper_html: { class: 'selectize-wrapper' }
-  = f.button :submit
+  = f.button :button
+    span.icon t
+    |Save
