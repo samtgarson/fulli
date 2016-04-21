@@ -1,15 +1,17 @@
 = simple_form_for [organisation, @employee] do |f|
-  = f.input :name
-  = f.input :title
+  .row
+    = f.input :name, wrapper_html: { class: 'half' }
+    = f.input :title, wrapper_html: { class: 'half' }
   = f.input :date_joined, 
     as: :date, 
     order: [:day, :month, :year], 
     start_year: Date.today.year - 50,
     end_year: Date.today.year
   = f.input :avatar, as: :file
-  = f.input :parent_id, collection: {}, 
-    input_html: @employee.parent_selector_options, 
-    wrapper_html: { class: 'selectize-wrapper' }
+  - if organisation.employees.any?
+    = f.input :parent_id, collection: {}, 
+      input_html: @employee.parent_selector_options, 
+      wrapper_html: { class: 'selectize-wrapper' }
   = f.button :button
     span.icon t
-    |Save
+    |Create Employee

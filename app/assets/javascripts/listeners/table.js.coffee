@@ -10,6 +10,7 @@ class @Table extends Listener
       @el.empty()
       @el.append(body)
       Listener.bindAll()
+      @_bindClick()
     )
 
   _bindClick: =>

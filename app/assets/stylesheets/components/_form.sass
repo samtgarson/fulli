@@ -1,3 +1,6 @@
+form
+  +clearfix
+
 .input
   input
     width: 100%
@@ -15,6 +18,12 @@
 
   &.disabled
     opacity: .5
+
+  &.half
+    +span-columns(6)
+
+    &:nth-of-type(2n)
+      +omega
 
   &.boolean input
     display: inline-block
@@ -88,7 +97,7 @@
 .btn
   display: inline-block
   padding: 15px
-  margin: 10px auto
+  margin: 0 auto 10px
   width: 100%
   border-radius: 3px
   background-color: $primary-2
@@ -100,42 +109,64 @@
   transition: .2s all ease
   cursor: pointer
   outline: none
+  width: auto
+  float: right
+
+  & + &
+    margin-right: 15px
 
   &:hover
     background-color: darken($primary-2, 10%)
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 6px 26px rgba(0,0,0,0.2)
 
-  &.inline
-    width: auto
 
   &.secondary
-    background-color: $secondary
-    color: rgba(black, .5)
+    background-color: transparent
+    color: $primary-2
 
     &:hover
-      background-color: darken($secondary, 10%)
+      box-shadow: none
+      background-color: transparent
+      color: darken($primary-2, 20%)
   
   .icon
     font-size: 1.5em !important
     margin-right: 10px
-    margin-left: -1em
 
 .form__links
   padding: 0
-  margin: 40px 0 60px
-  text-align: center
-
-  &.danger
-    background-color: rgba($primary-2, .1)
-    border-radius: 3px
-    color: $primary-2
-    +pad
-
-    a
-      color: $primary-2
+  text-align: right
+  clear: both
+  margin-top: 80px
+  opacity: .5
 
   li
     list-style-type: none
     margin-bottom: 10px
     a
       color: black
+
+.danger
+  background-color: rgba($primary-2, .1)
+  border-radius: 3px
+  color: $primary-2
+  +pad
+  margin: 0 -(flex-gutter())
+
+  h2
+    margin: 0
+
+  p 
+    display: inline-block
+    float: right
+
+  a
+    color: $primary-2
+
+.edit-btn
+  margin-top: 15px
+  opacity: .5
+  transition: .2s all ease
+
+  &:hover
+    opacity: 1

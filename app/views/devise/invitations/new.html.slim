@@ -1,9 +1,7 @@
 section
-  .row
-    h2 Invitation to join #{organisation.name}
-    = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
-      = hidden_field_tag :organisation_id, params[:organisation_id]
-      - resource.class.invite_key_fields.each do |field|
-        = f.input field
-      = f.button :submit, t("devise.invitations.new.submit_button")
-      = render 'components/back_button', url: edit_organisation_path(organisation), label: organisation.name
+  h2 Invitation to join #{organisation.name}
+  = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
+    = hidden_field_tag :organisation_id, params[:organisation_id]
+    - resource.class.invite_key_fields.each do |field|
+      = f.input field
+    = f.button :submit, t("devise.invitations.new.submit_button")

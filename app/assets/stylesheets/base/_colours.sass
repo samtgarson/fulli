@@ -1,14 +1,28 @@
-$primary-1:   #341F6A
+$primary-1:  #603471
 $primary-2: #B05A7B
-$primary-3:  #FDB280
+$primary-3:  #D3837D
 $secondary: #F5F5F5
 
-body
-  background-color: $secondary
-  background-image: image-url('bg.png')
+=primary-gradient
+  +linear-gradient(10deg, $primary-1, $primary-2, $primary-3, $fallback: transparent)
 
-section
+.gradient
+  +primary-gradient
+  color: white
+
+
+#particles-js
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  +primary-gradient
+  
+
+#wrapper
   background-color: white
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0px 80px rgba(0,0,0,0.1)
 
 a
   color: black

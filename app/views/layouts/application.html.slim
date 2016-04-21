@@ -8,11 +8,13 @@ html
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.0/vis.min.css'
     = stylesheet_link_tag    'application', media: 'all'
     
-    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.0/vis.min.js'
-    = javascript_include_tag 'application'
     = csrf_meta_tags
   body class=body_class
+    #particles-js
     == render 'components/header'
     == render 'components/flashes' if flash.any?
-    = yield
+    #wrapper
+      = yield
     == render 'components/footer'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.0/vis.min.js'
+    = javascript_include_tag 'application'

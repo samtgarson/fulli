@@ -51,15 +51,21 @@ h1
   font-size: 1.2em
 
 h2
-  +alt-font
-  font-size: 1em
-  text-align: center
-
-  a
-    opacity: .5
+  font-size: 2em
+  font-weight: normal
+  margin-top: 0
+  display: inline-block
 
   *:last-child
     margin-left: 10px
+
+  &.toggle a
+    opacity: .5
+
+h3
+  +alt-font
+  font-size: .8em
+  display: inline-block
 
 
 a
@@ -71,3 +77,9 @@ p a
 .icon
   +icon-font
   margin-top: -3px
+
+#back-button
+  +alt-font
+  font-size: .8em
+  span
+    margin-right: 10px

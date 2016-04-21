@@ -1,14 +1,11 @@
 section
-  .row
-    h2= organisation.name
-    - if @search.results.empty?
-      p.centered.spacer You don't have any employees in #{organisation.name} yet, add one to get started
-    - else
-      .table-wrapper#employee-table
-        = render 'organisations/list', obj: @search
-    = link_to new_organisation_employee_path(organisation), class: 'btn'
-      span.icon +
-      | Add a new employee
-    = link_to edit_organisation_path(organisation), class: 'btn secondary'
-      | Edit #{organisation.name}
-    = render 'components/back_button', url: organisations_path, label: 'Organisations'
+  h2 = organisation.name
+  - if @search.results.empty?
+    p.spacer You don't have any employees in #{organisation.name} yet, add one to get started
+  - else
+    .table-wrapper#employee-table
+      = render 'organisations/list', obj: @search
+  = link_to new_organisation_employee_path(organisation), class: 'btn'
+    span.icon +
+    | Add a new employee
+  = link_to "Edit #{organisation.name}", edit_organisation_path(organisation), class: 'btn secondary'

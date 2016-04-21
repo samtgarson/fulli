@@ -25,6 +25,10 @@ gem 'slugify'
 gem 'uglifier', '>= 1.3.0'
 gem 'virtus'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-particles.js'
+end
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'

@@ -1,2 +1,3 @@
-= link_to local_assigns[:url] || :back, class: 'btn secondary'
+= link_to local_assigns[:url] || :back, id: 'back-button'
+  span.icon ←
   | Back to #{local_assigns[:label]}

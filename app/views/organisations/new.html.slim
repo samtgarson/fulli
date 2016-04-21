@@ -1,8 +1,6 @@
 section
-  .row
-    h2 New Organisation
-    = simple_form_for organisation do |f|
-      = f.input :name, required: true
-      = f.input :url, type: :url
-      = f.button :submit
-      = render 'components/back_button'
+  h2 New Organisation
+  = simple_form_for organisation do |f|
+    = f.input :name, required: true
+    = f.input :url, type: :url
+    = f.button :submit
