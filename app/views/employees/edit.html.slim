@@ -1,19 +1,21 @@
 = render layout: 'components/profile', locals: {user: @employee}
   h2.toggle
-    span Summary
-    = link_to 'Skills'
-section
-  = render 'form'
-section    
-  = simple_form_for @employee, url: organisation_employee_path(organisation, @employee) do |f|
-    = f.simple_fields_for :employee_skills do |e|
-      = render partial: 'employee_skill_fields', locals: {f: e}
-    = f.button :button
-      span.icon t
-      | save
-    = link_to_add_association f, :employee_skills, class: 'inline btn secondary spacer'
-      span.icon +
-      | Add Skill
+    a data-tab-target=0 Summary
+    a data-tab-target=1 Skills
+section.tabs
+  .tab-wrapper
+    .tab data-tab=0
+      = render 'form'
+    .tab data-tab=1
+      = simple_form_for @employee, url: organisation_employee_path(organisation, @employee) do |f|
+        = f.simple_fields_for :employee_skills do |e|
+          = render partial: 'employee_skill_fields', locals: {f: e}
+        = f.button :button
+          span.icon t
+          | save
+        = link_to_add_association f, :employee_skills, class: 'inline btn secondary spacer'
+          span.icon +
+          | Add Skill
 section
   hr /
   .danger

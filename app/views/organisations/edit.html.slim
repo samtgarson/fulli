@@ -9,9 +9,6 @@ section
       | Save
 
   h2 Users
-  = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary'
-    span.icon +
-    | Invite a new User
   table
     tr
       th.avatar
@@ -28,6 +25,9 @@ section
         td = user.name
         td = user.email
         td = user.remove_link unless user == current_user
+  = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary centered'
+    span.icon +
+    | Invite a new User
   hr /
   .danger
     h2 Danger Zone

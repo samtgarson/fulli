@@ -1,0 +1,27 @@
+[data-tab-target]
+  cursor: pointer
+  opacity: .5
+  transition: .2s opacity ease
+
+  &.active
+    opacity: 1
+
+.tabs
+  overflow-x: hidden
+  padding: 0
+  margin: 25px
+
+  .tab-wrapper
+    width: 200%
+    transition: 0.3s all ease
+
+  .tab
+    width: 50%
+    box-sizing: border-box
+    float: left
+    vertical-align: top
+    opacity: 1
+    transition: .2s opacity ease
+
+    &:not(.active)
+      opacity: 0

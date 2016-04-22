@@ -13,7 +13,8 @@ section
           tr data-link=organisation_path(org)
             td = org.name
             td = org.employees.count
-            td.hover →
+            td.hover 
+              span.icon →
 
       = paginate @organisations
 
