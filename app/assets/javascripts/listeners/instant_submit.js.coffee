@@ -5,6 +5,10 @@ class @InstantSubmit extends Listener
     @_bindChange()
 
   _bindChange: =>
-    @el.find('[type=text]').putCursorAtEnd().bindWithDelay('keyup', ( => 
+    @el.find('input[name][id]').putCursorAtEnd()
+    @el.find('input[name][id]').bindWithDelay('keyup', ( => 
       @el.submit()
     ), 300)
+
+    @el.find('.selectized').each (i, el) =>
+      $(el).data('selectize').on('change', => @el.submit())

@@ -3,7 +3,7 @@ section
   - if @search.results.empty?
     p.spacer You don't have any employees in #{organisation.name} yet, add one to get started
   - else
-    .table-wrapper#employee-table
+    #employee-table
       = render 'organisations/list', obj: @search
   = link_to new_organisation_employee_path(organisation), class: 'btn'
     span.icon +

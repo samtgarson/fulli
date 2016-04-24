@@ -4,6 +4,10 @@ class EmployeeSearch
   include Draper::Decoratable
 
   attribute :query, String, default: ''
+  attribute :experience, Array[String], default: []
+  attribute :projects, Array[String], default: []
+  attribute :interests, Array[String], default: []
+  attribute :skills, Array[String], default: []
   attribute :id # organisation id
   attribute :page, Integer, default: 1
   attribute :per, Integer, default: 20
@@ -14,7 +18,21 @@ class EmployeeSearch
   validates :id, presence: true
 
   def self.allowed_params
-    attributes.map(&:name)
+    [
+      :query,
+      :id,
+      :page,
+      :per,
+      :order,
+      :reverse,
+      :except_id,
+      {
+        experience: [],
+        projects: [],
+        interests: [],
+        skills: []
+      }
+    ]
   end
 
   def results
@@ -22,6 +40,9 @@ class EmployeeSearch
                  .friendly.find(id)
                  .employees.all_except(except_id)
                  .search(query)
+                 .has_experience(experience)
+                 .has_projects(projects)
+                 .has_interests(interests)
                  .order(order_hash)
                  .page(page).per(per)
   end

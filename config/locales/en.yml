@@ -18,6 +18,8 @@ en:
         experience_list: Previous Experience
         interest_list: Interests
         project_list: Past Projects
+        skills: Skills
+        search: Search
   datetime:
     distance_in_words:
       about_x_hours:

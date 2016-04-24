@@ -33,6 +33,9 @@ class Employee < ActiveRecord::Base
 
   scope :search, -> (q) { query_search(q) unless !q.nil? && q.empty? }
   scope :all_except, -> (id) { where.not(id: id) unless !id.nil? && id.empty? }
+  scope :has_experience, -> (arr) { tagged_with(arr, on: :experiences) unless !arr.nil? && arr.empty? }
+  scope :has_projects, -> (arr) { tagged_with(arr, on: :projects) unless !arr.nil? && arr.empty? }
+  scope :has_interests, -> (arr) { tagged_with(arr, on: :interests) unless !arr.nil? && arr.empty? }
 
   after_save :add_empty_skill
 

@@ -1,9 +1,16 @@
 = form_tag params, remote: true, method: :get, class: 'instant-submit'
   .filter
+    .filter-tags
+      .row
+        = filter_tag :experience, class:"third", placeholder: 'experience_list', options: ActsAsTaggableOn::Tag.all.map(&:name) 
+        = filter_tag :interests, class:"third", placeholder: 'interest_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
+        = filter_tag :projects, class:"third", placeholder: 'project_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
+      = filter_tag :skills, class:"third", placeholder: 'skills', options: Skill.all.map(&:name)
     .filter-search
       = content_tag :div, class:"input #{ 'disabled' if params[:display] == 'graph' }"
         = text_field_tag :query, params[:query], placeholder: 'Search', disabled: (params[:display] == 'graph')
     .filter-buttons
       .filter-toggle = link_to_if params[:display] != 'table', 'l', {display: 'table'}, remote: true
       .filter-toggle = link_to_if params[:display] != 'graph', 'g', {display: 'graph'}, remote: true
-  = render "organisations/#{params[:display]}", obj: obj
+.table-wrapper
+  = render("organisations/#{params[:display]}", obj: obj)

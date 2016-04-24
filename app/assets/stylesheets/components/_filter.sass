@@ -1,12 +1,10 @@
 .filter
   +clearfix
 
-  [class*=filter]:last-of-type
-    +omega
-
   .filter-buttons
     +span-columns(2)
     +icon-font
+    +omega
     display: flex
     justify-content: space-around
 
@@ -27,4 +25,14 @@
       color: rgba(black, .2)
 
   .filter-search
-    +span-columns(10)
+    +span-columns(6)
+
+  .filter-tags
+    & > .input:last-child
+      margin-right: flex-gutter()
+
+    .input
+      margin-top: 5px
+      margin-bottom: 10px
+      background-color: $secondary
+      border-radius: 3px

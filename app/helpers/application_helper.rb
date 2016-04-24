@@ -25,4 +25,20 @@ module ApplicationHelper
       }
     }
   end
+
+  def filter_tag(key, options = {})
+    content_tag :div, class:"#{options[:class]} selectize-wrapper input #{ 'disabled' if params[:display] == 'graph' }" do
+      select_tag key, options_for_select(options[:options]),
+        multiple: true,
+        class: 'basic-tags',
+        placeholder: t("simple_form.labels.employee.#{options[:placeholder]}"), 
+        disabled: (params[:display] == 'graph'),
+        data: { options: {
+          selectize: {
+            items: [params[key]],
+            create: false
+          }
+        }}
+    end
+  end
 end

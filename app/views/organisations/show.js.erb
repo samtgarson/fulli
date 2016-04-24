@@ -1,2 +1,2 @@
 $('body')
-  .trigger('table:reload', '<%= j render("organisations/list", obj: @search) %>')
+  .trigger('table:reload', '<%= j render("organisations/#{params[:display]}", obj: @search) %>')
