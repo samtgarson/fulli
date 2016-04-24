@@ -15,6 +15,9 @@ en:
         title: Position
         avatar: Profile Picture
         parent_id: Direct Manager
+        experience_list: Previous Experience
+        interest_list: Interests
+        project_list: Past Projects
   datetime:
     distance_in_words:
       about_x_hours:

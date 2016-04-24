@@ -8,6 +8,7 @@ class Employee < ActiveRecord::Base
 
   accepts_nested_attributes_for :employee_skills, reject_if: :all_blank, allow_destroy: true
 
+  acts_as_taggable_on :experiences, :interests, :projects
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

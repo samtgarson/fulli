@@ -24,12 +24,8 @@ class EmployeesController < ApplicationController
     @employee = Employee.friendly.find(params[:id]).decorate context: self
     @employee.update_attributes(employee_params)
 
-    if @employee.valid?
-      flash[:notice] = "#{@employee.name} successfully updated."
-      redirect_to organisation_path(organisation)
-    else
-      render :edit
-    end
+    flash[:notice] = "#{@employee.name} successfully updated." if @employee.valid?
+    render :edit
   end
 
   def destroy
@@ -44,6 +40,6 @@ class EmployeesController < ApplicationController
   private
 
   def employee_params
-    params.require(:employee).permit(:name, :title, :date_joined, :avatar, :parent_id, employee_skills_attributes: [:skill, :rating, :id, :_destroy])
+    params.require(:employee).permit(:name, :title, :date_joined, :avatar, :parent_id, employee_skills_attributes: [:skill, :rating, :id, :_destroy], experience_list: [], interest_list: [], project_list: [])
   end
 end
