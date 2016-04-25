@@ -17,12 +17,17 @@
     height: 48px
     width: 48px
     background-color: $secondary
-    color: rgba(black, .5)
     text-align: center
     margin: 5px 0
 
     a
       color: rgba(black, .2)
+      transition: .2s all ease
+
+    &.active a
+      color: rgba(black, .5)
+      pointer-events: none
+
 
   .filter-search
     +span-columns(6)

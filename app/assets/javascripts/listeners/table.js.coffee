@@ -6,7 +6,7 @@ class @Table extends Listener
     @_bindClick()
 
   _bindEvents: =>
-    $('body').on('table:reload', (e, body) =>
+    $(document).on('table:reload', (e, body) =>
       @el.empty()
       @el.append(body)
       Listener.bindAll()

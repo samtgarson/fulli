@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def filter_tag(key, options = {})
-    content_tag :div, class:"#{options[:class]} selectize-wrapper input #{ 'disabled' if params[:display] == 'graph' }" do
+    content_tag :div, class:"#{options[:class]} third selectize-wrapper input #{ 'disabled' if params[:display] == 'graph' }" do
       select_tag key, options_for_select(options[:options]),
         multiple: true,
         class: 'basic-tags',
@@ -36,7 +36,8 @@ module ApplicationHelper
         data: { options: {
           selectize: {
             items: [params[key]],
-            create: false
+            create: false,
+            closeAfterSelect: true
           }
         }}
     end

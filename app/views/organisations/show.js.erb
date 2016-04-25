@@ -1,2 +1,3 @@
-$('body')
+$(document)
   .trigger('table:reload', '<%= j render("organisations/#{params[:display]}", obj: @search) %>')
+  .trigger('filter:toggle', '<%= params[:display] %>')
