@@ -36,4 +36,8 @@ class ApplicationController < ActionController::Base
                       end
   end
   helper_method :organisation
+
+  def back(label, url)
+    @back = {label: label, url: url}
+  end
 end

@@ -14,6 +14,7 @@ html
     == render 'components/header'
     == render 'components/flashes' if flash.any?
     #wrapper
+      = render 'components/back_button' if @back
       = yield
     == render 'components/footer'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.0/vis.min.js'

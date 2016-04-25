@@ -18,6 +18,7 @@ class OrganisationsController < ApplicationController
   end
 
   def edit
+    back organisation.name, organisation_path(organisation)
   end
 
   def update
@@ -30,6 +31,7 @@ class OrganisationsController < ApplicationController
   end
 
   def show
+    back 'Organisations', organisations_path
     params[:display] ||= 'table'
     case params[:display]
     when 'table'

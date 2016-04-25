@@ -17,6 +17,7 @@ class EmployeesController < ApplicationController
   end
 
   def edit
+    back organisation.name, organisation_path(organisation)
     @employee = Employee.find(params[:id]).decorate context: self
   end
 
