@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!, except: :home
+  before_action :check_access_to_org, except: :home, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
+
 
   def home
   end
@@ -10,6 +12,13 @@ class ApplicationController < ActionController::Base
 
   def page
     (params[:page] || 1).to_i
+  end
+
+  def check_access_to_org
+    unless current_user.organisation_ids.include? organisation.id
+      flash[:notice] = "You are not part of this organisation yet."
+      redirect_to root_path 
+    end
   end
 
   def after_sign_in_path_for(resource)
@@ -40,4 +49,5 @@ class ApplicationController < ActionController::Base
   def back(label, url)
     @back = {label: label, url: url}
   end
+  helper_method :back
 end

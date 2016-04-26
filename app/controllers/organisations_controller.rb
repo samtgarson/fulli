@@ -1,11 +1,12 @@
 class OrganisationsController < ApplicationController
-  skip_before_action :check_for_org, only: [:new, :create]
+  skip_before_action :check_access_to_org, only: [:new, :create, :index]
 
   def index
     @organisations = current_user.organisations.page(page)
   end
 
   def new
+    back 'Organisations', organisations_path
   end
 
   def create
@@ -13,6 +14,7 @@ class OrganisationsController < ApplicationController
     if @organisation.valid?
       redirect_to new_organisation_employee_path(@organisation)
     else
+      back 'Organisations', organisations_path
       render :new
     end
   end
@@ -26,6 +28,7 @@ class OrganisationsController < ApplicationController
     if organisation.valid?
       redirect_to organisation_path(organisation)
     else
+      back organisation.name, organisation_path(organisation)
       render :edit
     end
   end

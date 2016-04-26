@@ -1,5 +1,6 @@
 class EmployeesController < ApplicationController
   def new
+    back organisation.name, organisation_path(organisation)
     @employee = Employee.new(organisation: organisation).decorate context: self
   end
 
@@ -8,6 +9,7 @@ class EmployeesController < ApplicationController
     if @employee.valid?
       redirect_to organisation_path(organisation)
     else
+      back organisation.name, organisation_path(organisation)
       render :new
     end
   end
@@ -22,6 +24,7 @@ class EmployeesController < ApplicationController
   end
 
   def update
+    back organisation.name, organisation_path(organisation)
     @employee = Employee.friendly.find(params[:id]).decorate context: self
     @employee.update_attributes(employee_params)
 
