@@ -1,6 +1,9 @@
 form
   +clearfix
 
+  .form-actions
+    +clearfix
+
 .input
   input
     width: 100%
@@ -30,6 +33,35 @@ form
 
     &:nth-of-type(3n)
       +omega
+
+  &.icn
+    position: relative
+    input
+      padding-left: 40px
+
+    &::after
+      font-family: 'icomoon'
+      position: absolute
+      left: 20px
+      top: 50px
+      transform: translateY(-50%)
+      font-size: 1.1em
+      color: rgba(black, 0.2)
+
+    &.search::after
+      content: '\73'
+      bottom: 30px
+      top: auto
+
+    &.password::after
+      content: '\70'
+
+    &.tag .selectize-input
+      padding-left: 45px !important
+
+    &.tag::after
+      content: '\66'
+      top: 24px
 
   &.boolean input
     display: inline-block

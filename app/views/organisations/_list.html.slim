@@ -1,16 +1,12 @@
 = form_tag params, remote: true, method: :get, class: 'instant-submit'
   .filter
     .filter-tags
-      .row
-        = filter_tag :experience, placeholder: 'experience_list', options: ActsAsTaggableOn::Tag.all.map(&:name) 
-        = filter_tag :interests, placeholder: 'interest_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
-        = filter_tag :projects, placeholder: 'project_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
-      = filter_tag :skills, placeholder: 'skills', options: Skill.all.map(&:name)
+      = filter_tag :experience, class: 'icn tag third', placeholder: 'experience_list', options: ActsAsTaggableOn::Tag.all.map(&:name) 
+      = filter_tag :interests, class: 'icn tag third', placeholder: 'interest_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
+      = filter_tag :projects, class: 'icn tag third', placeholder: 'project_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
     .filter-search
-      = content_tag :div, class:"input #{ 'disabled' if params[:display] == 'graph' }"
-        = text_field_tag :query, params[:query], placeholder: 'Search', disabled: (params[:display] == 'graph')
-    .filter-buttons
-      .filter-toggle.active data-filter-toggle='table' = link_to 'l', { display: 'table' }, remote: true
-      .filter-toggle data-filter-toggle='graph' = link_to 'g', { display: 'graph' }, remote: true
+      = filter_tag :skills, class: 'icn tag half', placeholder: 'skills', options: Skill.all.map(&:name)
+      = content_tag :div, class:"half icn search input #{ 'disabled' if params[:display] == 'graph' }"
+        = text_field_tag :query, params[:query], placeholder: 'Search', disabled: (params[:display] == 'graph')      
 .table-wrapper
   = render("organisations/#{params[:display]}", obj: obj)

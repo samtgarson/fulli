@@ -18,4 +18,6 @@ section
 
       = paginate @organisations
 
-  = link_to '+ New Organisation', new_organisation_path, class: "btn#{' inline' unless @organisations.any?}"
+  = link_to new_organisation_path, class: "btn#{' inline' unless @organisations.any?}"
+    span.icon +
+    | New Organisation

@@ -7,10 +7,16 @@ class @Table extends Listener
 
   _bindEvents: =>
     $(document).on('table:reload', (e, body) =>
-      @el.empty()
-      @el.append(body)
-      Listener.bindAll()
-      @_bindClick()
+      h = getHeight(body)
+      bod = $(body).hide()
+
+      @el
+        .empty()
+        .animate({height: h}, 200, =>
+          bod.appendTo(@el).fadeIn()
+          Listener.bindAll()
+          @_bindClick()
+        )
     )
 
   _bindClick: =>
@@ -20,3 +26,8 @@ class @Table extends Listener
       $(this).click ->
         window.location = $(this).data('link')
 
+getHeight = (body) ->
+  el = $(body)
+  el.css('visibility', 'hidden')
+  $('body').append(el)
+  el.height()

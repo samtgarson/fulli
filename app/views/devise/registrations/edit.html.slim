@@ -9,13 +9,13 @@ section
         p
           | Currently waiting confirmation for: 
           = resource.unconfirmed_email
-      = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
+      = f.input :current_password, hint: "we need your current password to confirm your changes", required: true, wrapper_html: { class: 'icn' }
     .form-actions
       = f.button :submit, "Update"
-    = link_to 'Change your password', nil, class: 'btn secondary show-hide-toggle', data: { target: '#password-form' }
+      = link_to 'Change your password', nil, class: 'btn secondary show-hide-toggle', data: { target: '#password-form' }
     #password-form.show-hide
-      = f.input :password, autocomplete: "off", required: false, wrapper_html: { class: 'half' }
-      = f.input :password_confirmation, required: false, wrapper_html: { class: 'half' }
+      = f.input :password, autocomplete: "off", required: false, wrapper_html: { class: 'icn half' }
+      = f.input :password_confirmation, required: false, wrapper_html: { class: 'icn half' }
       = f.button :submit, "Update"
 section
   hr /

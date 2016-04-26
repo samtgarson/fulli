@@ -12,6 +12,7 @@ class @Tabs extends Listener
 
   gotoTab: (tab) =>
     @activeTab = tab
+    @_updateHeight()
     @_updateLinks()
     @_slideTabs()
 
@@ -25,6 +26,10 @@ class @Tabs extends Listener
       .removeClass('active')
       .filter('[data-tab-target=' + @activeTab + ']')
       .addClass('active')
+
+  _updateHeight: =>
+    h = @tabs.filter('[data-tab=' + @activeTab + ']').height()
+    @el.animate({height: h}, 200)
 
   _bindClicks: =>
     @links.click (e) =>

@@ -1,5 +1,9 @@
 section
-  h2 = organisation.name
+  h2
+    = organisation.name
+  .filter-buttons
+    .filter-toggle.active data-filter-toggle='table' = link_to 'l', { display: 'table' }, remote: true
+    .filter-toggle data-filter-toggle='graph' = link_to 'g', { display: 'graph' }, remote: true
   - if @search.results.empty?
     p.spacer You don't have any employees in #{organisation.name} yet, add one to get started
   - else
