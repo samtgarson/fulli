@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: :home
   before_action :check_access_to_org, except: :home, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_admin
+  before_action :set_admin, unless: :devise_controller?
 
 
   def home
@@ -18,7 +18,10 @@ class ApplicationController < ActionController::Base
   def check_access_to_org
     unless current_user.organisation_ids.include? organisation.id
       flash[:notice] = "You are not part of this organisation yet."
-      redirect_to root_path 
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js { render :nothing, status: 401 }
+      end
     end
   end
 
@@ -54,5 +57,12 @@ class ApplicationController < ActionController::Base
 
   def set_admin
     @admin = current_user && current_user.admin_of?(organisation)
+  end
+
+  def only_admins!
+    unless @admin
+      flash[:notice] = 'You are not authorized to access that page.'
+      redirect_to organisation_path(organisation) 
+    end
   end
 end

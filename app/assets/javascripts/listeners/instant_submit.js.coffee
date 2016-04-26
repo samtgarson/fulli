@@ -3,6 +3,12 @@ class @InstantSubmit extends Listener
 
   instantiate: =>
     @_bindChange()
+    @_bindSubmit()
+
+  _bindSubmit: =>
+    $(document).on('ajax:before', =>
+      return $.active == 0
+    )
 
   _bindChange: =>
     @el.find('input[name][id]').putCursorAtEnd()
@@ -10,5 +16,6 @@ class @InstantSubmit extends Listener
       @el.submit()
     ), 300)
 
-    @el.find('.selectized').each (i, el) =>
-      $(el).data('selectize').on('change', => @el.submit())
+    @el.on('change', => 
+      @el.submit()
+    )

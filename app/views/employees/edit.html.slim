@@ -7,7 +7,7 @@ section.tabs
     .tab data-tab=0
       = render 'form'
     .tab data-tab=1
-      = simple_form_for @employee, url: organisation_employee_path(organisation, @employee) do |f|
+      = simple_form_for @employee, url: organisation_employee_path(organisation, @employee), data: { disabled: !@admin } do |f|
         = f.input :experience_list, basic_tag_options(@employee.experience_list)
         = f.input :interest_list, basic_tag_options(@employee.interest_list)
         = f.input :project_list, basic_tag_options(@employee.project_list)

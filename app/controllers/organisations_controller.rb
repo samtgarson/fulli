@@ -1,5 +1,6 @@
 class OrganisationsController < ApplicationController
   skip_before_action :check_access_to_org, only: [:new, :create, :index]
+  skip_before_action :set_admin, only: :index
 
   def index
     @organisations = current_user.organisations.page(page)
@@ -20,6 +21,7 @@ class OrganisationsController < ApplicationController
   end
 
   def edit
+    only_admins!
     back organisation.name, organisation_path(organisation)
   end
 

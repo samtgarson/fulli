@@ -5,6 +5,7 @@ class @Listener
     if key? && key.length
       @classes.push cls
       cls.listenerSelector = key
+      cls.instances = []
 
   @bindAll: (e) =>
     for cls in @classes
@@ -14,7 +15,9 @@ class @Listener
     $(@listenerSelector).each (i, el) =>
       klass = @constructor
       if !$(el).data(@listenerSelector)?
-        $(el).data(@listenerSelector, new window[@name]($(el)))
+        instance = new window[@name]($(el))
+        $(el).data(@name, instance)
+        @instances.push instance
 
   constructor: (@el) ->
     @options = @mergeOptions()

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424195452) do
+ActiveRecord::Schema.define(version: 20160426205348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "associations", id: false, force: :cascade do |t|
-    t.boolean "admin"
+  create_table "associations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.boolean "admin",           default: false
     t.uuid    "user_id"
     t.uuid    "organisation_id"
   end

@@ -6,16 +6,20 @@ class @Table extends Listener
     @_bindClick()
 
   _bindEvents: =>
+    reloading = false
     $(document).on('table:reload', (e, body) =>
+      return true if reloading
+      reloading = true
       h = getHeight(body)
       bod = $(body).hide()
 
       @el
         .empty()
-        .animate({height: h}, 200, =>
+        .stop().animate({height: h}, 200, =>
           bod.appendTo(@el).fadeIn()
-          Listener.bindAll()
+          Graph.bindSelf()
           @_bindClick()
+          reloading = false
         )
     )
 
@@ -27,7 +31,7 @@ class @Table extends Listener
         window.location = $(this).data('link')
 
 getHeight = (body) ->
-  el = $(body)
-  el.css('visibility', 'hidden')
-  $('body').append(el)
-  el.height()
+  el = $(body).css('visibility', 'hidden')
+  h = $(el).appendTo('body').height()
+  el.remove()
+  return h
