@@ -15,12 +15,13 @@ section.tabs
         .skills-fields
           = f.simple_fields_for :employee_skills do |e|
             = render partial: 'employee_skill_fields', locals: {f: e}
-        = f.button :button
-          span.icon t
-          | save
-        = link_to_add_association f, :employee_skills, class: 'inline btn secondary spacer', data: { association_insertion_node: '.skills-fields', association_insertion_method: 'after' }
-          span.icon +
-          | Add Skill
+        - if @admin
+          = f.button :button
+            span.icon t
+            | save
+          = link_to_add_association f, :employee_skills, class: 'inline btn secondary spacer', data: { association_insertion_node: '.skills-fields', association_insertion_method: 'after' }
+            span.icon +
+            | Add Skill
 section
   hr /
   .danger

@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
   friendly_id :slug_candidates, use: :slugged
 
+  validates :name, :email, presence: true
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   def slug_candidates
     [
       :name,
@@ -17,11 +20,12 @@ class User < ActiveRecord::Base
     ]
   end
 
-
   def has_pending_invite?
     invited_to_sign_up? && !invitation_accepted?
   end
 
-  validates :name, :email, presence: true
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  def admin_of?(org)
+    associations.find_by(organisation_id: org.id).admin?
+  end
+
 end

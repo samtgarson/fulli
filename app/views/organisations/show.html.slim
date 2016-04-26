@@ -9,7 +9,8 @@ section
   - else
     #employee-table
       = render 'organisations/list', obj: @search
-  = link_to new_organisation_employee_path(organisation), class: 'btn'
-    span.icon +
-    | Add a new employee
-  = link_to "Edit #{organisation.name}", edit_organisation_path(organisation), class: 'btn secondary'
+  - if @admin
+    = link_to new_organisation_employee_path(organisation), class: 'btn'
+      span.icon +
+      | Add a new employee
+    = link_to "Edit #{organisation.name}", edit_organisation_path(organisation), class: 'btn secondary'

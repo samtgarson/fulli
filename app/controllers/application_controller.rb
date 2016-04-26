@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: :home
   before_action :check_access_to_org, except: :home, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_admin
 
 
   def home
@@ -50,4 +51,8 @@ class ApplicationController < ActionController::Base
     @back = {label: label, url: url}
   end
   helper_method :back
+
+  def set_admin
+    @admin = current_user && current_user.admin_of?(organisation)
+  end
 end
