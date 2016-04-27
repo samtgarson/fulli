@@ -5,6 +5,7 @@
 #= require putCursorAtEnd
 #= require cocoon
 #= require particles.js.js
+#= require rangeslider.js.js
 #= require listener
 #= require_tree .
 #= require_self

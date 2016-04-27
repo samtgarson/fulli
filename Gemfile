@@ -28,6 +28,7 @@ gem 'virtus'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-particles.js'
+  gem 'rails-assets-rangeslider.js'
 end
 
 group :development, :test do

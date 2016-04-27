@@ -23,6 +23,8 @@ class @Table extends Listener
         )
       else
         @el.empty().append(bod.show())
+        @_bindClick()
+        Graph.bindSelf()
         reloading = false
     )
 

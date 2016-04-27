@@ -1,0 +1,29 @@
+.rangeslider--horizontal
+  height: 100%
+  border-radius: 0
+  box-shadow: none
+  background-color: rgba(black, .1)
+  width: 90%
+
+.rangeslider__fill
+  +linear-gradient(to left, $primary-1, $primary-2, $primary-3)
+  border-radius: 0
+  box-shadow: none
+
+.slider-value
+  +alt-font
+  position: absolute
+  right: 20px
+  top: 14px
+  font-size: 1em
+
+.rangeslider__handle
+  box-shadow: none
+  background: #DDD
+  border: 0
+  width: 15px
+  height: 15px
+  top: -7px !important
+
+  &::after
+    content: none
