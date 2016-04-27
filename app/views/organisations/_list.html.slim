@@ -5,7 +5,7 @@
       = filter_tag :interests, class: 'icn tag third', placeholder: 'interest_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
       = filter_tag :projects, class: 'icn tag third', placeholder: 'project_list', options: ActsAsTaggableOn::Tag.all.map(&:name)
     .filter-search
-      = filter_tag :skills, class: 'icn tag half', placeholder: 'skills', options: Skill.all.map(&:name)
+      = filter_tag :skills, class: 'icn tag half', placeholder: 'skills', options: Skill.all.map(&:name), max_items: 1
       = content_tag :div, class:"half icn search input #{ 'disabled' if params[:display] == 'graph' }"
         = text_field_tag :query, params[:query], placeholder: 'Search', disabled: (params[:display] == 'graph')      
 .table-wrapper

@@ -1,5 +1,5 @@
 $(document)
-  .trigger('table:reload', '<%= j render("organisations/#{params[:display]}", obj: @search) %>')
+  .trigger('table:reload', ['<%= j render("organisations/#{params[:display]}", obj: @search) %>', '<%= params[:display] %>'])
   .trigger('filter:toggle', '<%= params[:display] %>')
 <% if params[:display] == 'graph' %>
   .trigger('filter:hide')

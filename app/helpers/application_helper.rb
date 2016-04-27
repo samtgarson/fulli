@@ -37,7 +37,8 @@ module ApplicationHelper
           selectize: {
             items: [params[key]],
             create: false,
-            closeAfterSelect: true
+            closeAfterSelect: true,
+            maxItems: options.fetch(:max_items, 1000)
           }
         }}
     end

@@ -3,6 +3,7 @@ class EmployeeSearch
   include ActiveModel::Model
   include Draper::Decoratable
 
+  attribute :display, String, default: 'table'
   attribute :query, String, default: ''
   attribute :experience, Array[String], default: []
   attribute :projects, Array[String], default: []
@@ -26,6 +27,7 @@ class EmployeeSearch
       :order,
       :reverse,
       :except_id,
+      :display,
       {
         experience: [],
         projects: [],
@@ -36,15 +38,27 @@ class EmployeeSearch
   end
 
   def results
-    @results ||= Organisation
-                 .friendly.find(id)
-                 .employees.all_except(except_id)
-                 .search(query)
-                 .has_experience(experience)
-                 .has_projects(projects)
-                 .has_interests(interests)
-                 .order(order_hash)
-                 .page(page).per(per)
+    @results ||= if filtered_list.is_a? Array 
+                   Kaminari.paginate_array(filtered_list).page(page).per(per)
+                 else
+                   filtered_list.page(page).per(per)
+                 end
+  end
+
+  def filtered_list
+    @filtered_list ||= Organisation
+     .friendly.find(id)
+     .employees.all_except(except_id)
+     .search(query)
+     .has_experience(experience)
+     .has_projects(projects)
+     .has_interests(interests)
+     .has_skills(skills)
+     .order_by_rating(skill, order_hash)
+  end
+
+  def skill
+    skills.first if skills.any?
   end
 
   def order_hash

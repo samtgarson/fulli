@@ -1,16 +1,25 @@
-table
-  tr
-    th.avatar
-    th = obj.sort_link_for 'Name', 'name'
-    th = obj.sort_link_for 'Position', 'title'
-    th = obj.sort_link_for 'Joined', 'date_joined'
-    th
-  - obj.results.each do |e|
-      tr data-link=organisation_employee_path(organisation, e)
-        td.avatar = image_tag(e.avatar)
-        td = e.name
-        td = e.title
-        td = time_ago_in_words(e.date_joined).titleize + ' ago'
-        td.hover 
-          span.icon →
-= paginate obj.results, remote: true
+- if obj.results.empty?
+  p.centered No matching people!
+- else
+  table
+    tr
+      th.avatar
+      th = obj.sort_link_for 'Name', 'name'
+      - if obj.skills.any?
+        th: a.active.reverse #{obj.skill} Rating
+      - else
+        th = obj.sort_link_for 'Position', 'title'
+        th = obj.sort_link_for 'Joined', 'date_joined'
+      th
+    - obj.results.each do |e|
+        tr data-link=organisation_employee_path(organisation, e)
+          td.avatar = image_tag(e.avatar)
+          td = e.name
+          - if params[:skills]
+            td = e.rating_for_skill obj.skill
+          - else 
+            td = e.title
+            td = time_ago_in_words(e.date_joined).titleize + ' ago'
+          td.hover 
+            span.icon →
+  = paginate obj.results, remote: true

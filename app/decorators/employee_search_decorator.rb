@@ -1,6 +1,9 @@
 class EmployeeSearchDecorator < Draper::Decorator
-  delegate :current_page, :total_pages, :limit_value, :entry_name, :total_count, :offset_value, :last_page?
   delegate_all
+
+  def results
+    EmployeesDecorator.decorate object.results, context: context
+  end
 
   def sort_link_for(title, attribute)
     helpers.link_to(
@@ -10,14 +13,16 @@ class EmployeeSearchDecorator < Draper::Decorator
   end
 
   def path_options(attribute)
-    {
-      order: attribute
-    }.tap do |h|
-      h[:reverse] = 1 if order == attribute && reverse == 0
+    context.params.permit(object.class.allowed_params)
+    .tap do |h|
+      h[:order] = attribute
+      h[:reverse] = order == attribute && reverse == 0 ? 1 : 0
+      h[:format] = :js
     end
   end
 
   def link_class(attribute)
+    return 'disabled' if skill.present?
     [].tap do |a|
       a << 'active' if attribute == order
       a << 'reverse' if attribute == order && reverse == 0

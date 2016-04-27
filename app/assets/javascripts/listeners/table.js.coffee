@@ -7,21 +7,27 @@ class @Table extends Listener
 
   _bindEvents: =>
     reloading = false
-    $(document).on('table:reload', (e, body) =>
+    $(document).on('table:reload', (e, body, display) =>
       return true if reloading
       reloading = true
-      h = getHeight(body)
       bod = $(body).hide()
 
-      @el
-        .empty()
-        .stop().animate({height: h}, 200, =>
+      if @displayHasChanged(display)
+        @el.empty().stop().animate({
+          height: getHeight(body)
+        }, 200, =>
           bod.appendTo(@el).fadeIn()
           Graph.bindSelf()
           @_bindClick()
           reloading = false
         )
+      else
+        @el.empty().append(bod.show())
+        reloading = false
     )
+
+  displayHasChanged: (display) =>
+    $('.filter-toggle.active').data('filter-toggle') != display
 
   _bindClick: =>
     @el.find('tr[data-link]').each ->
