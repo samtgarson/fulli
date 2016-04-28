@@ -41,7 +41,7 @@ class Employee < ActiveRecord::Base
     if name.nil?
       order(fallback)
     else
-      all.sort_by { |e| e.decorate.rating_for_skill(name) }.reverse
+      all.to_a.uniq.sort_by { |e| e.decorate.rating_for_skill(name) }.reverse
     end
   end
 

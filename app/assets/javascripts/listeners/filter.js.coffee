@@ -1,5 +1,5 @@
 class @Filter extends Listener
-  Listener.register @, '.filter'
+  @registerListener '.filter'
     
   instantiate: =>
     @_bindEvents()

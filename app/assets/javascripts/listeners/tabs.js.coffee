@@ -1,5 +1,5 @@
 class @Tabs extends Listener
-  Listener.register @, '.tabs'
+  @registerListener '.tabs'
 
   instantiate: =>
     @links = $('[data-tab-target]')
@@ -12,7 +12,7 @@ class @Tabs extends Listener
 
   gotoTab: (tab) =>
     @activeTab = tab
-    @_updateHeight()
+    @updateHeight()
     @_updateLinks()
     @_slideTabs()
 
@@ -27,7 +27,7 @@ class @Tabs extends Listener
       .filter('[data-tab-target=' + @activeTab + ']')
       .addClass('active')
 
-  _updateHeight: =>
+  updateHeight: =>
     h = @tabs.filter('[data-tab=' + @activeTab + ']').height()
     @el.animate({height: h}, 200)
 

@@ -1,5 +1,5 @@
 class @BasicTags extends Listener
-  Listener.register @, 'select.basic-tags'
+  @registerListener 'select.basic-tags'
     
   instantiate: =>
     @el.selectize(@options.selectize)
@@ -13,4 +13,10 @@ class @BasicTags extends Listener
       plugins: ['remove_button']
 
 $ =>
-  $('.edit_employee').on('cocoon:after-insert', => BasicTags.bindSelf())
+  $('.edit_employee').on('cocoon:after-insert', => 
+    BasicTags.bindSelf()
+    StarRating.bindSelf()
+    Tabs.instances[0].updateHeight()
+  ).on('cocoon:after-remove', =>
+    Tabs.instances[0].updateHeight()
+  )

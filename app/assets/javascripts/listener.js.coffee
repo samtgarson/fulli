@@ -1,23 +1,22 @@
 class @Listener
   @classes: []
 
-  @register: (cls, key) =>
-    if key? && key.length
-      @classes.push cls
-      cls.listenerSelector = key
-      cls.instances = []
-
   @bindAll: (e) =>
-    for cls in @classes
+    for cls in Listener.classes
       cls.bindSelf()
 
   @bindSelf: ->
     $(@listenerSelector).each (i, el) =>
-      klass = @constructor
-      if !$(el).data(@listenerSelector)?
+      unless $(el).data(@name)?
         instance = new window[@name]($(el))
         $(el).data(@name, instance)
         @instances.push instance
+
+  @registerListener: (key) ->
+    if key? && key.length
+      Listener.classes.push @
+      @listenerSelector = key
+      @instances = []
 
   constructor: (@el) ->
     @options = @mergeOptions()

@@ -16,7 +16,7 @@
           td.avatar = image_tag(e.avatar)
           td = e.name
           - if params[:skills]
-            td = e.rating_for_skill obj.skill
+            td.star-rating.disabled = number_field_tag :rating, e.rating_for_skill(obj.skill)
           - else 
             td = e.title
             td = time_ago_in_words(e.date_joined).titleize + ' ago'

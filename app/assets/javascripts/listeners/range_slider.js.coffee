@@ -1,5 +1,5 @@
 class @RangeSlider extends Listener
-  Listener.register @, 'input[type=range]'
+  @registerListener 'input[type=range]'
     
   instantiate: =>
     @el.rangeslider(@options)
