@@ -1,4 +1,31 @@
-section.gradient.hero
-  h1 Hey!
+- content_for :hero
+  h2 Fulli helps you keep track of who can do what in your organisation
+section.centered
+  .third
+    h1
+      span.icon f
+    h1 Record and track the experience and skillset of your team
+
+  .third
+    h1
+      span.icon g
+    h1 Keep track of your organisational structure
+
+  .third
+    h1
+      span.icon s
+    h1 Immediately find the right team member for any job
+
 section
-  p More hey
+  .testimonial
+    = image_tag 'happy_user.png', class: 'avatar'
+    h2 I use Fulli to find the right people for every brief and client, plus I can keep tabs on how balanced the office is.
+    h3 Gabrielle Rowan, Senior Team Assistant at Seen Presents
+
+section
+  hr /
+  .button-center
+    =mail_to ENV['CONTACT_EMAIL'], 'Ask me a question', subject: 'Tell me about Fulli', class: 'centered btn secondary'
+    =link_to new_user_registration_path, class: 'centered btn'
+      span.icon t
+      | Sign Up

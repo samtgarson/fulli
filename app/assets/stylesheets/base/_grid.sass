@@ -10,12 +10,26 @@ body
   width: 95%
 
 section
+  +row
   +pad(25px)
   position: relative
 
 .hero
+  +outer-container
   text-align: center
-  padding: 150px 0
+  color: white
+  position: relative
+  margin: 30px auto
+
+  h2
+    max-width: 50vw
+
+.half
+  +span-columns(6)
+  +omega(2n)
+
+.third
+  +span-columns(4)
 
 .right
   float: right
