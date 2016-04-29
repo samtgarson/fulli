@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'autoprefixer-rails'
+gem 'aws-sdk'
 gem 'ancestry'
 gem 'bourbon'
 gem 'cocoon', '~> 1.2.0'
