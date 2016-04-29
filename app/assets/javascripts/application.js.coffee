@@ -12,4 +12,4 @@
 #= require_self
 
 $ ->
-  particlesJS.load('particles-js', '/assets/particles.json')
+  particlesJS.load('particles-js', $('#particles-js').data('json-path'))

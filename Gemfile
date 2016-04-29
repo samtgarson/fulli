@@ -1,3 +1,4 @@
+ruby '2.3.0'
 source 'https://rubygems.org'
 
 gem 'acts-as-taggable-on', '~> 3.4'
@@ -31,6 +32,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-rangeslider.js'
   gem 'rails-assets-five-star-rating'
 end
+
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'dotenv-rails'

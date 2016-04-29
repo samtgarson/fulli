@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-    title Metabolism
+    title Fulli.io
 
     = favicon_link_tag 'favicon.png'
 
@@ -12,7 +12,7 @@ html
     
     = csrf_meta_tags
   body class=body_class
-    #particles-js
+    #particles-js data-json-path=asset_path('particles.json')
     == render 'components/header'
     == render 'components/flashes' if flash.any?
     .hero
