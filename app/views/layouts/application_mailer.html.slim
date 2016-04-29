@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title An Email from Fulli
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1" name="viewport" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Open+Sans:300,600,300italic,600italic'
+    = stylesheet_link_tag    'emails', media: 'all'
+    = stylesheet_link_tag    'emails', media: 'all', data: { roadie_ignore: true }
+
+  body.emails
+    /! HIDDEN PREHEADER TEXT
+    div style=("display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;")
+      | An email from Fulli
+
+    table align="center" width="100%"
+      tr
+        td
+          /[if (gte mso 9)|(IE)]
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="500">
+              <tr>
+                <td align="center" valign="top" width="500">
+          table.wrapper align="center" width="100%"
+            tr
+              td
+                h3 Fulli
+
+          table.wrapper align="center" width="100%"
+            tr
+              td
+                == yield
+
+          table.wrapper align="center" width="100%"
+            tr
+              td
+                p Thanks,
+                p Sam from Fulli
+          /[if (get mso 9)|(IE)]
+            </td>
+            </tr>
+            </table>
