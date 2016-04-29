@@ -1,6 +1,6 @@
 .star-rating
   position: relative
-  
+
   &.disabled
     pointer-events: none
 
@@ -37,3 +37,13 @@
   .c-rating__item:hover,
   .c-rating__item.is-active
     background-position: -100% 0
+
+  table &
+    .slider-value
+      display: none
+
+    .c-rating__item
+      background-image: image-url('star-white.png')
+
+      &::after
+        background-color: white

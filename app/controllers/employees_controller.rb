@@ -1,4 +1,6 @@
 class EmployeesController < ApplicationController
+  before_action :only_admins!, except: [:show, :edit]
+
   def new
     back organisation.name, organisation_path(organisation)
     @employee = Employee.new(organisation: organisation).decorate context: self

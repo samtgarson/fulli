@@ -21,14 +21,18 @@
     &::after
       content: none !important
 
-.humans .selectize-input
-  &.has-items
+.humans 
+  .option
     padding: 10px 15px !important
+
+    .avatar
+      margin-right: 30px
+  .selectize-input
+    &.has-items
+      padding: 10px 15px !important
 
 .basic-tags,
 .skills-tags
-  .option
-    padding: 15px
   .selectize-input
     div.item
       background-color: rgba(white, 0.7)
@@ -56,6 +60,7 @@
 
   .option, .create
     +main-font
+    padding: 15px
     font-weight: bold
 
     span
@@ -64,9 +69,6 @@
     &.active
       background-color: white
       color: $primary-2
-
-    img.avatar
-      margin: 10px 20px 10px 10px
 
     .highlight
       font-weight: bold

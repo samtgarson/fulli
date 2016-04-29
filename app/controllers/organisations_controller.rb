@@ -1,6 +1,7 @@
 class OrganisationsController < ApplicationController
   skip_before_action :check_access_to_org, only: [:new, :create, :index]
-  skip_before_action :set_admin, only: :index
+  skip_before_action :set_admin, only: [:index, :new, :create]
+  before_action :only_admins!, except: [:index, :new, :create, :show]
 
   def index
     @organisations = current_user.organisations.page(page)
@@ -13,6 +14,7 @@ class OrganisationsController < ApplicationController
   def create
     @organisation = current_user.organisations.create(org_params)
     if @organisation.valid?
+      current_user.associations.find_by(organisation: @organisation).update_attributes admin: true
       redirect_to new_organisation_employee_path(@organisation)
     else
       back 'Organisations', organisations_path
@@ -21,7 +23,6 @@ class OrganisationsController < ApplicationController
   end
 
   def edit
-    only_admins!
     back organisation.name, organisation_path(organisation)
   end
 

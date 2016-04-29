@@ -11,6 +11,7 @@ class @BasicTags extends Listener
       selectOnTab: true
       copyClassesToDropdown: false
       plugins: ['remove_button']
+      dropdownParent: 'body'
 
 $ =>
   $('.edit_employee').on('cocoon:after-insert', => 
