@@ -1,4 +1,4 @@
 section.profile
-  = image_tag local_assigns[:user].avatar, class: 'avatar right'
+  = image_tag local_assigns[:user].avatar.url, class: 'avatar right'
   h3.right = local_assigns[:user].name
   = yield if block_given?

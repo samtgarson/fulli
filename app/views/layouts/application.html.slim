@@ -15,8 +15,7 @@ html
     #particles-js data-json-path=asset_path('particles.json')
     == render 'components/header'
     == render 'components/flashes' if flash.any?
-    .hero
-      = content_for :hero
+    = content_for :hero
     #wrapper
       = render 'components/back_button' if @back
       = yield
