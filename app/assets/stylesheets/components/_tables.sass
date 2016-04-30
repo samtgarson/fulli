@@ -20,12 +20,22 @@ table
     text-align: left
     padding: 20px 0
 
-    &.hover
+    strong
+      +alt-font
+      opacity: .5
+      font-size: .8em
+
+    form
+      display: inline-block
+      &:not(:first-child)
+        margin-left: 20px
+
+    .hover
       opacity: 0
       transition: 0.1s opacity ease
 
-    &:hover ~ .hover,
-    &.hover:hover
+    &:hover ~ td .hover,
+    &:hover .hover
       opacity: 1
 
     &:last-child

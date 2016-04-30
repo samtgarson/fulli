@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426205348) do
+ActiveRecord::Schema.define(version: 20160430130834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "associations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.boolean "admin",           default: false
-    t.uuid    "user_id"
-    t.uuid    "organisation_id"
+    t.string "role",            default: "false"
+    t.uuid   "user_id"
+    t.uuid   "organisation_id"
   end
 
   add_index "associations", ["organisation_id"], name: "index_associations_on_organisation_id", using: :btree

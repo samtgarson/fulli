@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   resources :users
   resources :organisations, path: '/app' do
+    resources :association, only: :update
     resources :employees, except: [:index]
-    delete :remove_user, on: :member, as: :remove_user
+    delete 'remove_user/:user_id', action: :remove_user, on: :member, as: :remove_user
+    put :transfer, on: :member, as: :transfer
   end
 
   authenticated :user do
