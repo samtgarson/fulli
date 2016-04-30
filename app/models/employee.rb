@@ -2,7 +2,7 @@ class Employee < ActiveRecord::Base
   belongs_to :organisation
   has_ancestry cache_depth: true
   has_attached_file :avatar
-  
+
   has_many :employee_skills, dependent: :destroy
   has_many :skills, through: :employee_skills
 
