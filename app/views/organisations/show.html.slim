@@ -3,7 +3,7 @@ section
     = organisation.name
   - if @search.results.empty?
     - if @admin
-      p.spacer You don't have any employees in #{organisation.name} yet, add one to get started
+      p.spacer #{organisation.name} has no employees yet, add one to get started
     - else
       p.spacer #{organisation.name} has no employees yet. Ask your administrator to get started.
   - else

@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def current_user
+    super.decorate
+  end
+
   def page
     (params[:page] || 1).to_i
   end

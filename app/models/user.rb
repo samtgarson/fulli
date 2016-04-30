@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def admin_of?(org)
-    associations.find_by(organisation_id: org.id).admin?
+    %w(admin owner).include? associations.find_by(organisation_id: org.id).role
   end
 
 end

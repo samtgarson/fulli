@@ -1,9 +1,38 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
+  def role_form
+    case role
+    when 'owner'
+      'Owner'
+    when 'admin'
+      [].tap do |a|
+        a << helpers.content_tag(:span, 'Admin')
+        a << promote_form(nil, 'Demote from Admin') if helpers.current_user.role == 'owner'
+      end.join(' ').html_safe
+    else
+      promote_form(:admin, 'Make Admin') if helpers.current_user.role.present?
+    end
+  end
+
+  def association
+    associations.find_by(organisation_id: helpers.organisation.id)
+  end
+
+  def role
+    association.role
+  end
+
+  def owner?
+    role == 'owner'
+  end
+
+  def is_current?
+    object == helpers.current_user
+  end
+
   def remove_link
     if user.has_pending_invite?
-      # context.remove_user_invitation_path(invitation_token: invitation_token, user_id: id)
       helpers.link_to context.user_path(object), method: :delete, remote: true do
         helpers.content_tag :span, 'b', class: 'icon'
       end
@@ -11,6 +40,17 @@ class UserDecorator < Draper::Decorator
       helpers.link_to context.remove_user_organisation_path(user_id: slug), method: :delete, remote: true do
         helpers.content_tag :span, 'b', class: 'icon'
       end
+    end
+  end
+
+  private
+
+  def promote_form(new_role, label)
+    helpers.simple_form_for [helpers.organisation, association] do |f|
+      [
+        f.hidden_field(:role, value: new_role),
+        f.button(:button, label, class: 'hover btn secondary inline')
+      ].join(' ').html_safe
     end
   end
 end

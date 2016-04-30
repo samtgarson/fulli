@@ -14,6 +14,7 @@ section
       th.avatar
       th User
       th Email
+      th Role
       th
     - organisation.users.each do |user|
       tr class=('faded' if user.has_pending_invite?) data-id=user.id
@@ -22,12 +23,24 @@ section
             span.icon m
           - else
             = image_tag(user.avatar.url)
-        td = user.name
+        td 
+          = user.name
         td = user.email
-        td = user.remove_link unless user == current_user
+        td = user.role_form
+        td = user.remove_link unless user.owner?
   = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary centered'
     span.icon +
     | Invite a new User
+
+  - if current_user.owner?
+    = form_tag transfer_organisation_path(organisation), method: :put
+      h2 Transfer Ownership
+      .selectize-wrapper.input.select
+        = select_tag :user_id, organisation.transfer_options, prompt: 'Choose someone to transfer ownship to.', class: 'basic-tags'
+      = button_tag :submit, class: 'btn secondary'
+        span.icon →
+        | Transfer Ownership
+
   hr /
   .danger
     h2 Danger Zone

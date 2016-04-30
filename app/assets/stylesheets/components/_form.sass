@@ -1,5 +1,6 @@
 form
   +clearfix
+  clear: both
 
   .form-actions
     +clearfix
@@ -155,7 +156,9 @@ form
   cursor: pointer
   outline: none
   width: auto
-  float: right
+
+  &:not(.inline)
+    float: right
 
   & + &
     margin-right: 15px
@@ -168,6 +171,10 @@ form
   &.secondary
     background-color: transparent
     color: $primary-2
+
+    &.inline
+      margin: 0
+      padding: 0
 
     &:hover
       box-shadow: none

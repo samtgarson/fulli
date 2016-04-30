@@ -14,7 +14,7 @@ class OrganisationsController < ApplicationController
   def create
     @organisation = current_user.organisations.create(org_params)
     if @organisation.valid?
-      current_user.associations.find_by(organisation: @organisation).update_attributes admin: true
+      current_user.associations.find_by(organisation: @organisation).update_attributes role: 'owner'
       redirect_to new_organisation_employee_path(@organisation)
     else
       back 'Organisations', organisations_path
@@ -52,6 +52,16 @@ class OrganisationsController < ApplicationController
     organisation.users.delete(selected_user)
     selected_user.organisations.delete(organisation)
     render 'users/destroy'
+  end
+
+  def transfer
+    from = organisation.associations.find_by role: 'owner'
+    to = organisation.associations.find_by user_id: params[:user_id]
+    from.update_attributes(role: 'admin') 
+    to.update_attributes(role: 'owner')
+
+    flash[:notice] = "#{organisation.name} transferred successfully."
+    redirect_to edit_organisation_path(organisation), status: 303
   end
 
   def destroy
