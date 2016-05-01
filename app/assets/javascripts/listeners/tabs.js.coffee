@@ -1,5 +1,5 @@
-class @Tabs extends Listener
-  @registerListener '.tabs'
+class Listeners.Tabs extends Listener
+  @listenerSelector: '.tabs'
 
   instantiate: =>
     @links = $('[data-tab-target]')

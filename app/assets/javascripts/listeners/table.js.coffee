@@ -1,5 +1,5 @@
-class @Table extends Listener
-  @registerListener '.table-wrapper'
+class Listeners.Table extends Listener
+  @listenerSelector: '.table-wrapper'
 
   instantiate: =>
     @_bindEvents()
@@ -17,16 +17,14 @@ class @Table extends Listener
           height: getHeight(body)
         }, 200, =>
           bod.appendTo(@el).fadeIn()
-          Graph.bindSelf()
-          StarRating.bindSelf()
+          Listener.bindAll()
           @_bindClick()
           reloading = false
         )
       else
         @el.empty().append(bod.show())
+        Listener.bindAll()
         @_bindClick()
-        Graph.bindSelf()
-        StarRating.bindSelf()
         reloading = false
     )
 

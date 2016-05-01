@@ -1,5 +1,5 @@
-class @StarRating extends Listener
-  @registerListener '.star-rating'
+class Listeners.starrating extends Listener
+  @listenerSelector: '.star-rating'
     
   instantiate: =>
     @input = @el.find('input').hide()

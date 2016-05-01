@@ -1,5 +1,5 @@
-class @DisabledForm extends Listener
-  @registerListener 'form[data-disabled=true]'
+class Listeners.DisabledForm extends Listener
+  @listenerSelector: 'form[data-disabled=true]'
     
   instantiate: =>
     @disableAll()

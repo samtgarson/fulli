@@ -1,5 +1,5 @@
-class @BasicTags extends Listener
-  @registerListener 'select.basic-tags'
+class Listeners.BasicTags extends Listener
+  @listenerSelector: 'select.basic-tags'
     
   instantiate: =>
     @el.selectize(@options.selectize)

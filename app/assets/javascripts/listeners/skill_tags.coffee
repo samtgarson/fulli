@@ -1,5 +1,5 @@
-class @SkillsTags extends @BasicTags
-  @registerListener '.skills-tags'
+class Listeners.SkillsTags extends Listeners.BasicTags
+  @listenerSelector: '.skills-tags'
 
   create: (input) =>
     text: input,

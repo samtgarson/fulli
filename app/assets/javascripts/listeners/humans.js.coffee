@@ -1,5 +1,5 @@
-class @Humans extends Listener
-  @registerListener '.humans'
+class Listeners.Humans extends Listener
+  @listenerSelector: '.humans'
     
   instantiate: =>
     @el.selectize(@options.selectize)

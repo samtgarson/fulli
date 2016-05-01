@@ -1,22 +1,16 @@
 class @Listener
-  @classes: []
 
   @bindAll: (e) =>
-    for cls in Listener.classes
+    for name, cls of Listeners
       cls.bindSelf()
 
   @bindSelf: ->
+    @instances ?= []
     $(@listenerSelector).each (i, el) =>
       unless $(el).data(@name)?
-        instance = new window[@name]($(el))
+        instance = new Listeners[@name]($(el))
         $(el).data(@name, instance)
         @instances.push instance
-
-  @registerListener: (key) ->
-    if key? && key.length
-      Listener.classes.push @
-      @listenerSelector = key
-      @instances = []
 
   constructor: (@el) ->
     @options = @mergeOptions()
@@ -30,3 +24,5 @@ class @Listener
 
 $ ->
   setTimeout Listener.bindAll, 0
+
+@Listeners = {}

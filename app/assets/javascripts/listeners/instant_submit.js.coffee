@@ -1,5 +1,5 @@
-class @InstantSubmit extends Listener
-  @registerListener '.instant-submit'
+class Listeners.InstantSubmit extends Listener
+  @listenerSelector: '.instant-submit'
 
   instantiate: =>
     @_bindChange()
