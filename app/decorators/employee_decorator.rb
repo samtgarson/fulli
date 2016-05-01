@@ -33,10 +33,4 @@ class EmployeeDecorator < Draper::Decorator
       url: context.organisation_employee_url(helpers.organisation, object)
     }
   end
-
-  private
-
-  def max_depth
-    Employee.maximum(:ancestry_depth)
-  end
 end
