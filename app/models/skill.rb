@@ -1,6 +1,6 @@
 class Skill < ActiveRecord::Base
-  has_many :employee_skills
-  has_many :employees, through: :employee_skill
+  has_many :employee_skills, inverse_of: :skill
+  has_many :employees, through: :employee_skill, inverse_of: :skills
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true

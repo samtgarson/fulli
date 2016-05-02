@@ -4,14 +4,18 @@ body
 
 #wrapper
   +outer-container
-  +pad(25px)
+  +pad
   position: relative
   border-radius: 10px
   width: 95%
+  overflow: hidden
+  
+  +media($small)
+    border-radius: 5px
 
 section
   +row
-  +pad(25px)
+  +pad
   position: relative
 
 .hero
@@ -27,9 +31,13 @@ section
 .half
   +span-columns(6)
   +omega(2n)
+  +media($small)
+    +fill-parent
 
 .third
   +span-columns(4)
+  +media($small)
+    +fill-parent
 
 .right
   float: right

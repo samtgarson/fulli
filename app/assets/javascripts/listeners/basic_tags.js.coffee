@@ -15,9 +15,9 @@ class Listeners.BasicTags extends Listener
 
 $ =>
   $('.edit_employee').on('cocoon:after-insert', => 
-    BasicTags.bindSelf()
-    StarRating.bindSelf()
-    Tabs.instances[0].updateHeight()
+    Listeners.BasicTags.bindSelf()
+    Listeners.StarRating.bindSelf()
+    Listeners.Tabs.instances[0].updateHeight()
   ).on('cocoon:after-remove', =>
-    Tabs.instances[0].updateHeight()
+    Listeners.Tabs.instances[0].updateHeight()
   )

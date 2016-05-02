@@ -1,4 +1,6 @@
-= form_tag params, remote: true, method: :get, class: 'instant-submit'
+= check_box_tag :show_filter
+label for='show_filter'
+= form_tag params, remote: true, method: :get, class: 'instant-submit filter-form'
   .filter
     .filter-tags
       = filter_tag :experience, class: 'icn tag third', placeholder: 'experience_list', options: ActsAsTaggableOn::Tag.all.map(&:name) 

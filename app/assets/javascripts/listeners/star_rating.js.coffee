@@ -1,4 +1,4 @@
-class Listeners.starrating extends Listener
+class Listeners.StarRating extends Listener
   @listenerSelector: '.star-rating'
     
   instantiate: =>

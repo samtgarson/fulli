@@ -1,3 +1,37 @@
+#show_filter
+  display: none
+
+  & + label
+    display: none
+    +media($small)
+      display: block
+      width: 100%
+      border-radius: 3px
+      height: 50px
+      background-color: $secondary
+      margin-bottom: 10px
+      padding: 15px
+
+      &::after
+        content: 'Show Filtering Controls'
+        +main-font
+        opacity: 0.4
+
+  &:checked + label::after
+    content: 'Hide Filtering Controls'
+
+.filter-form
+  +media($small)
+    max-height: 0
+    opacity: 0
+    transition: .3s all ease
+    overflow: hidden
+
+    input:checked ~ &
+      max-height: 350px
+      opacity: 1
+
+
 .filter-buttons
   +icon-font
   float: right
@@ -9,6 +43,9 @@
     font-size: 22px
     text-align: center
     margin-top: 10px
+
+    +media($small)
+      margin-top: 0
 
     a
       margin-left: 10px

@@ -7,9 +7,9 @@ class @Listener
   @bindSelf: ->
     @instances ?= []
     $(@listenerSelector).each (i, el) =>
-      unless $(el).data(@name)?
-        instance = new Listeners[@name]($(el))
-        $(el).data(@name, instance)
+      unless $(el).data('listener')?
+        instance = new @($(el))
+        $(el).data('listener', instance)
         @instances.push instance
 
   constructor: (@el) ->

@@ -31,12 +31,16 @@ input:not([type=checkbox]),
 
   &.half
     +span-columns(6)
+    +media($small)
+      +fill-parent
 
     &:nth-of-type(2n)
       +omega
 
   &.third
     +span-columns(4)
+    +media($small)
+      +fill-parent
 
     &:nth-of-type(3n)
       +omega
@@ -115,13 +119,15 @@ input:not([type=checkbox]),
       padding: 23px
 
     label, 
-    .hint
+    .hint,
+    .error
       position: absolute
       top: -20px
       left: 0
       margin: 0
 
-    .hint
+    .hint,
+    .error
       left: auto
       right: 0
 
@@ -135,6 +141,8 @@ input:not([type=checkbox]),
     opacity: .5
     font-size: 0.8em 
     margin-top: 3px
+    +media($small)
+      display: none
 
   .error
     +alt-font

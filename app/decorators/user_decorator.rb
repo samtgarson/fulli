@@ -8,10 +8,10 @@ class UserDecorator < Draper::Decorator
     when 'admin'
       [].tap do |a|
         a << helpers.content_tag(:span, 'Admin')
-        a << promote_form(nil, 'Demote from Admin') if helpers.current_user.role == 'owner'
+        a << promote_form(nil, 'Demote from Admin') if helpers.current_user.owner_of?(helpers.organisation)
       end.join(' ').html_safe
     else
-      promote_form(:admin, 'Make Admin') if helpers.current_user.role.present?
+      promote_form(:admin, 'Make Admin') if helpers.current_user.admin_of?(helpers.organisation)
     end
   end
 

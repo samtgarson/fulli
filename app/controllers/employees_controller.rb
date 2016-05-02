@@ -30,7 +30,11 @@ class EmployeesController < ApplicationController
     @employee = Employee.friendly.find(params[:id]).decorate context: self
     @employee.update_attributes(employee_params)
 
-    flash[:notice] = "#{@employee.name} successfully updated." if @employee.valid?
+    if @employee.valid?
+      flash[:notice] = "#{@employee.name} successfully updated." 
+    else
+      flash[:alert] = "Something went wrong. Please try again." 
+    end
     render :edit
   end
 
