@@ -1,11 +1,18 @@
 .skill-wrapper
+  +clearfix
+
   .input.select
     +span-columns(7)
     height: 50px
+    +media($small)
+      +fill-parent
+      margin-bottom: 10px
 
   .input.star-rating
     +span-columns(4)
     height: 50px
+    +media($small)
+      +span-columns(3)
 
   .btn
     +span-columns(1)

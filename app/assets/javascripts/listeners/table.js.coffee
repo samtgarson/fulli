@@ -35,8 +35,8 @@ class Listeners.Table extends Listener
     @el.find('tr[data-link]').each ->
       $(this).addClass('clickable')
       
-      $(this).click ->
-        window.location = $(this).data('link')
+      $(this).on('click touchend', ->
+        window.location = $(this).data('link'))
 
 getHeight = (body) ->
   el = $(body).css('visibility', 'hidden')

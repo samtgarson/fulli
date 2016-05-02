@@ -9,25 +9,26 @@ section
       | Save
 
   h2 Users
-  table
-    tr
-      th.avatar
-      th User
-      th Email
-      th Role
-      th
-    - organisation.users.each do |user|
-      tr class=('faded' if user.has_pending_invite?) data-id=user.id
-        td.avatar 
-          - if user.has_pending_invite?
-            span.icon m
-          - else
-            = image_tag(user.avatar.url)
-        td 
-          = user.name
-        td = user.email
-        td = user.role_form
-        td = user.remove_link unless user.owner?
+  .table-wrapper
+    table
+      tr
+        th.avatar
+        th User
+        th Email
+        th Role
+        th
+      - organisation.users.each do |user|
+        tr class=('faded' if user.has_pending_invite?) data-id=user.id
+          td.avatar 
+            - if user.has_pending_invite?
+              span.icon m
+            - else
+              = image_tag(user.avatar.url)
+          td 
+            = user.name
+          td = user.email
+          td = user.role_form
+          td = user.remove_link unless user.owner?
   = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary centered'
     span.icon +
     | Invite a new User

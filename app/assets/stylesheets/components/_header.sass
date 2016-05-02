@@ -1,19 +1,45 @@
 #header
   +outer-container
-  padding: 25px 50px
+  +pad
   color: black
   width: 95%
 
   h1 
+    +pad(0 default)
     +alt-font
     display: inline-block
     a
       color: white
 
+  input
+    display: none
+
+  label
+    display: none
+    font-size: 0
+    +media($small)
+      display: block
+      float: right
+      +pad(20px default 0)
+      font-size: 1.8em !important
+      color: white
+
 #nav
   float: right
-  padding: 0
+  +pad(10px default 0)
   margin: 0
+
+  +media($small)
+    float: none
+    text-align: center
+    max-height: 0
+    transition: .2s all ease
+
+    input:checked ~ &
+      max-height: 50px
+
+    li 
+      display: block
 
   li
     list-style-type: none

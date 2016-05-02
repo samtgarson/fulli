@@ -16,6 +16,7 @@ class Employee < ActiveRecord::Base
   validates :name, :date_joined, :title, presence: true
   validates :avatar, attachment_presence: true
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
+  validates_associated :employee_skills
 
   include PgSearch
   pg_search_scope(

@@ -1,20 +1,30 @@
 .testimonial
-  width: 750px
-  max-width: 100%
-  margin: 50px auto 0
+  .testimonial-avatar
+    +span-columns(2)
+    +shift(2)
 
-  .avatar
-    height: 100px
-    width: 100px
-    border-radius: 100px
-    float: left
-    margin: 10px 50px 20px 0
+    .avatar
+      height: 100px
+      width: 100px
+      border-radius: 100px
+      margin: 10px 50px 20px 0
+
+  .testimonial-content
+    +span-columns(7)
+
+  *[class*=testimonial-]
+    +media($small)
+      +fill-parent
+      +shift(0)
+      text-align: center
+
+      .avatar
+        margin: 0
 
   h2 
     display: block
     margin-bottom: 10px
     font-size: 1.8em
-
 
   h3
     display: block
