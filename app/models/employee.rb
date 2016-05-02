@@ -1,9 +1,9 @@
 class Employee < ActiveRecord::Base
   belongs_to :organisation
   has_ancestry cache_depth: true
-  has_attached_file :avatar, default_url: 'missing.jpg'
+  has_attached_file :avatar
   
-  has_many :employee_skills
+  has_many :employee_skills, dependent: :destroy
   has_many :skills, through: :employee_skills
 
   accepts_nested_attributes_for :employee_skills, reject_if: :all_blank, allow_destroy: true

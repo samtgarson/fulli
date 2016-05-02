@@ -113,6 +113,11 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    heap (0.3.0)
+      httparty (~> 0.13)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     ice_nine (0.11.1)
     jquery-rails (4.1.1)
@@ -134,6 +139,7 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    multi_xml (0.5.5)
     neat (1.7.4)
       bourbon (>= 4.0)
       sass (>= 3.3)
@@ -291,6 +297,7 @@ DEPENDENCIES
   draper
   factory_girl
   friendly_id (~> 5.1.0)
+  heap (~> 0.3)
   jquery-rails
   kaminari
   neat

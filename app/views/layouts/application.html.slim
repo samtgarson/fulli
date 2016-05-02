@@ -12,6 +12,9 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     
     = csrf_meta_tags
+    = heap_analytics
+    = heap_identify(current_user.email, name: current_user.name) if user_signed_in?
+
   body class=body_class
     #particles-js data-json-path=asset_path('particles.json')
     == render 'components/header'

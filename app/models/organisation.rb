@@ -1,7 +1,7 @@
 class Organisation < ActiveRecord::Base
   has_many :employees, dependent: :destroy
   has_many :users, through: :associations
-  has_many :associations
+  has_many :associations, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :url, format: {:with => URI.regexp}

@@ -41,6 +41,7 @@ class OrganisationsController < ApplicationController
     params[:display] ||= 'table'
     case params[:display]
     when 'table'
+      record_event
       @search = EmployeeSearch.new(params.permit EmployeeSearch.allowed_params).decorate context: self
     when 'graph'
       @graph = OrganisationGraph.new organisation.employees, context: self
@@ -73,6 +74,19 @@ class OrganisationsController < ApplicationController
   end
 
   private
+
+  def record_event
+    Heap.event('Perform filter', current_user.email, clean_search_params )
+  end
+
+  def clean_search_params
+    params.permit(:query, {
+      experience: [],
+      projects: [],
+      interests: [],
+      skills: []
+    }).symbolize_keys.each_with_object({}) { |(k,v), sum| sum[k] = v.to_s }
+  end
 
   def selected_user
     User.friendly.find(params[:user_id])
