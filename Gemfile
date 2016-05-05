@@ -43,6 +43,10 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -50,7 +54,5 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
-  gem 'factory_girl'
-  gem 'database_cleaner'
+  gem 'simplecov', require: false
 end

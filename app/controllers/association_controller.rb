@@ -4,7 +4,7 @@ class AssociationController < ApplicationController
     if association.update_attributes association_params
       flash[:notice] = "#{association.user.name} has been updated successfully."
     else
-      flash[:alert] = "Something went wrong. Please try again or drop us an email."
+      flash[:alert] = 'Something went wrong. Please try again or drop us an email.'
     end
     redirect_to edit_organisation_path(organisation)
   end

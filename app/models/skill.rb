@@ -17,9 +17,9 @@ class Skill < ActiveRecord::Base
     end
 
     def generate_slug_for(name)
-      name
-        .gsub(' and ', ' ')
-        .slugify(true)
+      name.
+        gsub(' and ', ' ').
+        slugify(true)
     end
   end
 end

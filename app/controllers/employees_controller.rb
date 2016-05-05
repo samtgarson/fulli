@@ -31,9 +31,9 @@ class EmployeesController < ApplicationController
     @employee.update_attributes(employee_params)
 
     if @employee.valid?
-      flash[:notice] = "#{@employee.name} successfully updated." 
+      flash[:notice] = "#{@employee.name} successfully updated."
     else
-      flash[:alert] = "Something went wrong. Please try again." 
+      flash[:alert] = 'Something went wrong. Please try again.'
     end
     render :edit
   end

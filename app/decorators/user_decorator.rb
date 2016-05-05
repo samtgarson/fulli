@@ -19,20 +19,18 @@ class UserDecorator < Draper::Decorator
     associations.find_by(organisation_id: helpers.organisation.id)
   end
 
-  def role
-    association.role
-  end
+  delegate :role, to: :association
 
   def owner?
     role == 'owner'
   end
 
-  def is_current?
+  def current?
     object == helpers.current_user
   end
 
   def remove_link
-    if user.has_pending_invite?
+    if user.pending_invite?
       helpers.link_to context.user_path(object), method: :delete, remote: true do
         helpers.content_tag :span, 'b', class: 'icon'
       end

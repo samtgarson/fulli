@@ -38,7 +38,7 @@ class EmployeeSearch
   end
 
   def results
-    @results ||= if filtered_list.is_a? Array 
+    @results ||= if filtered_list.is_a? Array
                    Kaminari.paginate_array(filtered_list).page(page).per(per)
                  else
                    filtered_list.page(page).per(per)
@@ -46,15 +46,15 @@ class EmployeeSearch
   end
 
   def filtered_list
-    @filtered_list ||= Organisation
-     .friendly.find(id)
-     .employees.all_except(except_id)
-     .search(query)
-     .has_experience(experience)
-     .has_projects(projects)
-     .has_interests(interests)
-     .has_skills(skills)
-     .order_by_rating(skill, order_hash)
+    @filtered_list ||= Organisation.
+                       friendly.find(id).
+                       employees.all_except(except_id).
+                       search(query).
+                       has_tags(experience, :experiences).
+                       has_tags(projects, :projects).
+                       has_tags(interests, :interests).
+                       has_skills(skills).
+                       order_by_rating(skill, order_hash)
   end
 
   def skill
