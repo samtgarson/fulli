@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def check_access_to_org
     unless current_user.organisation_ids.include? organisation.id
-      flash[:notice] = "You are not part of this organisation yet."
+      flash[:notice] = 'You are not part of this organisation yet.'
       respond_to do |format|
         format.html { redirect_to root_path }
         format.js { render :nothing, status: 401 }
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   helper_method :organisation
 
   def back(label, url)
-    @back = {label: label, url: url}
+    @back = { label: label, url: url }
   end
   helper_method :back
 
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   def only_admins!
     unless @admin
       flash[:notice] = 'You are not authorized to access that page.'
-      redirect_to organisation_path(organisation) 
+      redirect_to organisation_path(organisation)
     end
   end
 end

@@ -3,15 +3,15 @@ class User < ActiveRecord::Base
   has_attached_file :avatar
 
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+    :recoverable, :rememberable, :trackable, :validatable,
+    :confirmable
   has_many :organisations, through: :associations
   has_many :associations
 
   friendly_id :slug_candidates, use: :slugged
 
   validates :name, :email, presence: true
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
 
   def slug_candidates
     [

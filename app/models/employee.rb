@@ -36,13 +36,13 @@ class Employee < ActiveRecord::Base
   scope :all_except, -> (id) { where.not(id: id) unless !id.nil? && id.empty? }
   scope :has_tags, -> (arr = '', scope = nil) { tagged_with(arr, (scope ? { on: scope } : {})) unless arr.empty? }
   scope :has_skills, -> (arr) { joins(:skills).where(skills: { name: arr }) unless arr.empty? }
-  scope :order_by_rating, -> (name, fallback) do
+  scope :order_by_rating, (lambda do |name, fallback|
     if name.nil?
       order(fallback)
     else
       all.to_a.uniq.sort_by { |e| e.decorate.rating_for_skill(name) }.reverse
     end
-  end
+  end)
 
   after_save :add_empty_skill
 

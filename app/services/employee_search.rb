@@ -46,15 +46,15 @@ class EmployeeSearch
   end
 
   def filtered_list
-    @filtered_list ||= Organisation
-                       .friendly.find(id)
-                       .employees.all_except(except_id)
-                       .search(query)
-                       .has_tags(experience, :experiences)
-                       .has_tags(projects, :projects)
-                       .has_tags(interests, :interests)
-                       .has_skills(skills)
-                       .order_by_rating(skill, order_hash)
+    @filtered_list ||= Organisation.
+                       friendly.find(id).
+                       employees.all_except(except_id).
+                       search(query).
+                       has_tags(experience, :experiences).
+                       has_tags(projects, :projects).
+                       has_tags(interests, :interests).
+                       has_skills(skills).
+                       order_by_rating(skill, order_hash)
   end
 
   def skill

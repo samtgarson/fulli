@@ -7,6 +7,5 @@ class RenameTagsToSkills < ActiveRecord::Migration
     add_reference :employee_skills, :skill, type: :uuid
 
     remove_column :skills, :scope
-
   end
 end

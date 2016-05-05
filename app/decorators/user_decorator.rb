@@ -19,9 +19,7 @@ class UserDecorator < Draper::Decorator
     associations.find_by(organisation_id: helpers.organisation.id)
   end
 
-  def role
-    association.role
-  end
+  delegate :role, to: :association
 
   def owner?
     role == 'owner'
