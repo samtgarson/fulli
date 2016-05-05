@@ -18,9 +18,9 @@ section
         th Role
         th
       - organisation.users.each do |user|
-        tr class=('faded' if user.has_pending_invite?) data-id=user.id
+        tr class=('faded' if user.pending_invite?) data-id=user.id
           td.avatar 
-            - if user.has_pending_invite?
+            - if user.pending_invite?
               span.icon m
             - else
               = image_tag(user.avatar.url)

@@ -5,3 +5,4 @@ FactoryGirl.define do
     title { Faker::Name.title }
     avatar { File.new("#{Rails.root}/public/avatars/original/missing.png") }
   end
+end

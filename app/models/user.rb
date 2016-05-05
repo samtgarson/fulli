@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     ]
   end
 
-  def has_pending_invite?
+  def pending_invite?
     invited_to_sign_up? && !invitation_accepted?
   end
 

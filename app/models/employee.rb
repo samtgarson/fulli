@@ -34,9 +34,7 @@ class Employee < ActiveRecord::Base
 
   scope :search, -> (q) { query_search(q) unless !q.nil? && q.empty? }
   scope :all_except, -> (id) { where.not(id: id) unless !id.nil? && id.empty? }
-  scope :has_experience, -> (arr) { tagged_with(arr, on: :experiences) unless arr.empty? }
-  scope :has_projects, -> (arr) { tagged_with(arr, on: :projects) unless arr.empty? }
-  scope :has_interests, -> (arr) { tagged_with(arr, on: :interests) unless arr.empty? }
+  scope :has_tags, -> (arr = '', scope = nil) { tagged_with(arr, (scope ? { on: scope } : {})) unless arr.empty? }
   scope :has_skills, -> (arr) { joins(:skills).where(skills: { name: arr }) unless arr.empty? }
   scope :order_by_rating, -> (name, fallback) do
     if name.nil?

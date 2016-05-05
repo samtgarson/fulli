@@ -4,7 +4,7 @@ class Organisation < ActiveRecord::Base
   has_many :associations, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
-  validates :url, format: {:with => URI.regexp}
+  validates :url, format: { with: URI.regexp }, allow_blank: true
 
   extend FriendlyId
   friendly_id :name, use: :slugged
