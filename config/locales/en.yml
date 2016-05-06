@@ -3,8 +3,9 @@ en:
     home: Home
     orgs: Organisations
     account: Account
-    login: Log In
+    log_in: Log In
     sign_up: Sign Up
+    log_out: Log Out
   views:
     pagination:
       previous: ←
@@ -20,6 +21,12 @@ en:
         project_list: Past Projects
         skills: Skills
         search: Search
+  organisations:
+    index: 
+      empty: You don't have any organisations yet, add one to get started
+    show:
+      empty: '%{name} has no employees yet. Ask your administrator to get started.'
+      empty_admin: '%{name} has no employees yet, add one to get started'
   datetime:
     distance_in_words:
       about_x_hours:

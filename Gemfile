@@ -39,14 +39,17 @@ end
 gem 'rails_12factor', group: :production
 
 group :development, :test do
+  gem 'capybara'
+  gem 'database_cleaner'
   gem 'dotenv-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'launchy'
+  gem 'poltergeist'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'database_cleaner'
 end
 
 group :development do

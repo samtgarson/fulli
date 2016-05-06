@@ -3,9 +3,9 @@ section
     = organisation.name
   - if @search.results.empty?
     - if @admin
-      p.spacer #{organisation.name} has no employees yet, add one to get started
+      p.spacer = t '.empty_admin', name: organisation.name
     - else
-      p.spacer #{organisation.name} has no employees yet. Ask your administrator to get started.
+      p.spacer = t '.empty', name: organisation.name
   - else
     .filter-buttons
       .filter-toggle.active data-filter-toggle='table' = link_to 'l', { display: 'table' }, remote: true
@@ -13,7 +13,7 @@ section
     #employee-table
       = render 'organisations/list', obj: @search
   - if @admin
-    = link_to new_organisation_employee_path(organisation), class: 'btn'
+    = link_to new_organisation_employee_path(organisation), class: 'btn', id: 'new-employee'
       span.icon +
       | Add a new employee
     = link_to "Edit #{organisation.name}", edit_organisation_path(organisation), class: 'btn secondary'

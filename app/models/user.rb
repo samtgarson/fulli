@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     invited_to_sign_up? && !invitation_accepted?
   end
 
+  def promote_to(org, role = 'admin')
+    associations.find_by(organisation_id: org.id).update_attributes role: role
+  end
+
   def admin_of?(org)
     %w(admin owner).include? associations.find_by(organisation_id: org.id).role
   end

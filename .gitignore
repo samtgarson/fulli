@@ -15,3 +15,4 @@
 .env
 /spec/examples.txt
 .rubocop-https---*
+coverage

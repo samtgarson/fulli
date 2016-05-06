@@ -14,7 +14,7 @@
     - obj.results.each do |e|
         tr data-link=organisation_employee_path(organisation, e)
           td.avatar = image_tag(e.avatar)
-          td = e.name
+          td = link_to e.name, organisation_employee_path(organisation, e)
           - if params[:skills]
             td.star-rating.disabled = number_field_tag :rating, e.rating_for_skill(obj.skill)
           - else 
