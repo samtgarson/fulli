@@ -27,6 +27,10 @@ en:
     show:
       empty: '%{name} has no employees yet. Ask your administrator to get started.'
       empty_admin: '%{name} has no employees yet, add one to get started'
+  employees:
+    edit:
+      summary: summary
+      skills_interests: Skills & Interests
   datetime:
     distance_in_words:
       about_x_hours:

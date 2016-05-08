@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Viewing an organisation' do
   let(:org) { FactoryGirl.create :organisation }
   let(:current_user) { FactoryGirl.create :user, :confirmed, organisation_ids: [org.id] }
+  let(:new_user) { FactoryGirl.build :user }
 
   background do
     log_in_user

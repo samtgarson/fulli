@@ -14,6 +14,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include AccountHelpers, type: :feature
+  config.include FormHelpers, type: :feature
   config.include AbstractController::Translation
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -46,5 +47,10 @@ RSpec.configure do |config|
 
   config.append_after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.include Warden::Test::Helpers
+  config.before(:each, js: true) do
+    Warden.test_mode!
   end
 end

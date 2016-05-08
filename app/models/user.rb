@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     ]
   end
 
+  def send_reset_password_instructions
+    super if invitation_token.nil?
+  end
+
   def pending_invite?
     invited_to_sign_up? && !invitation_accepted?
   end

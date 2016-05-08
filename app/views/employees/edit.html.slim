@@ -1,7 +1,7 @@
 = render layout: 'components/profile', locals: {user: @employee}
   h2.toggle
-    a data-tab-target=0 Summary
-    a data-tab-target=1 Skills & Interests
+    a data-tab-target=0 = t '.summary'
+    a data-tab-target=1 = t '.skills_interests'
 section.tabs
   .tab-wrapper
     .tab data-tab=0
