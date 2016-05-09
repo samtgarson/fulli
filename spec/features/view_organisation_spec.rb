@@ -47,7 +47,7 @@ RSpec.feature 'Viewing an organisation' do
         expect(page).to have_selector 'td', text: e.name
       end
 
-      click_on (employee = org.employees.first).name
+      click_on((employee = org.employees.first).name)
       expect(page).to have_selector 'h3', text: employee.name
     end
   end

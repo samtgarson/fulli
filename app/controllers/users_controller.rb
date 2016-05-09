@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def destroy
     @id = user.id
-    name = (user.destroy).name
+    name = user.destroy.name
 
     flash.now[:alert] = "#{name} removed successfully."
 

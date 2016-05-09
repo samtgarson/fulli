@@ -1,16 +1,5 @@
-require 'simplecov'
-
-if ENV['CIRCLE_ARTIFACTS']
-  dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
-  SimpleCov.coverage_dir(dir)
-end
-
-SimpleCov.start 'rails' do
-  add_group 'Decorators', 'app/decorators'
-  add_group 'Services', 'app/services'
-  groups.delete 'Libraries'
-  groups.delete 'Jobs'
-end
+require 'coveralls'
+Coveralls.wear!('rails')
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
