@@ -50,9 +50,12 @@ class OrganisationsController < ApplicationController
 
   def remove_user
     @id = selected_user.id
-    organisation.users.delete(selected_user)
-    selected_user.organisations.delete(organisation)
-    render 'users/destroy'
+    Association.find_by(user_id: selected_user.id, organisation_id: organisation.id).destroy
+
+    respond_to do |format|
+      format.js { render 'users/destroy' }
+      format.html { redirect_to selected_user == current_user ? organisations_path : edit_organisation_path(organisation) }
+    end
   end
 
   def transfer

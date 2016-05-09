@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def check_access_to_org
     unless current_user.organisation_ids.include? organisation.id
-      flash[:notice] = 'You are not part of this organisation yet.'
+      flash[:notice] = I18n.t('flashes.not_member')
       respond_to do |format|
         format.html { redirect_to root_path }
         format.js { render :nothing, status: 401 }
@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
 
   def only_admins!
     unless @admin
-      flash[:notice] = 'You are not authorized to access that page.'
+      flash[:notice] = I18n.t('flashes.not_authorized')
       redirect_to organisation_path(organisation)
     end
   end

@@ -6,6 +6,9 @@ en:
     log_in: Log In
     sign_up: Sign Up
     log_out: Log Out
+  flashes:
+    not_authorized: You are not authorized to access that page.
+    not_member: You are not part of that organisation.
   views:
     pagination:
       previous: ←
@@ -27,9 +30,9 @@ en:
     show:
       empty: '%{name} has no employees yet. Ask your administrator to get started.'
       empty_admin: '%{name} has no employees yet, add one to get started'
-  employees:
-    edit:
-      summary: summary
+  components:
+    profile:
+      summary: Summary
       skills_interests: Skills & Interests
   datetime:
     distance_in_words:

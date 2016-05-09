@@ -3,10 +3,17 @@ require 'rails_helper'
 RSpec.feature 'Viewing an organisation' do
   let(:org) { FactoryGirl.create :organisation }
   let(:current_user) { FactoryGirl.create :user, :confirmed, organisation_ids: [org.id] }
-  let(:new_user) { FactoryGirl.build :user }
 
   background do
     log_in_user
+  end
+
+  scenario 'fails when not part of the organisation' do
+    current_user.update_attributes organisation_ids: []
+    visit organisation_path(org)
+
+    expect(page).to have_selector 'h2', text: 'Organisations'
+    expect(page).to have_selector '.flash', text: t('flashes.not_member')
   end
 
   context 'as an admin' do

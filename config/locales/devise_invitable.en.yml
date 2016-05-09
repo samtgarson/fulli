@@ -12,6 +12,7 @@ en:
       new:
         header: "Send invitation"
         submit_button: "Send an invitation"
+        title: Invitation to join %{name}
       edit:
         header: "Set your password"
         submit_button: "Set my password"

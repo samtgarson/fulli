@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable,
     :confirmable
   has_many :organisations, through: :associations
-  has_many :associations
+  has_many :associations, dependent: :destroy
 
   friendly_id :slug_candidates, use: :slugged
 

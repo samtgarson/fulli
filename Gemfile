@@ -40,11 +40,13 @@ gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'capybara'
+  gem 'capybara-email'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'launchy'
+  gem 'orderly'
   gem 'poltergeist'
   gem 'pry-byebug'
   gem 'pry-rails'

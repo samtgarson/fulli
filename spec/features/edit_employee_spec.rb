@@ -18,7 +18,7 @@ RSpec.feature 'Editing an organisation' do
 
     fill_in 'Name', with: new_employee[:name]
     fill_in 'Position', with: new_employee[:title]
-    select_date 'employee_date_joined', with: new_employee[:date_joined]
+    select_date new_employee[:date_joined], from: 'employee_date_joined'
     attach_file 'Profile Picture', "#{Rails.root}/public/avatars/original/missing.png"
     click_button 'Save'
 
@@ -27,14 +27,14 @@ RSpec.feature 'Editing an organisation' do
   end
 
   scenario 'can edit an employee', js: true do
-    login_as(current_user, :scope => :user)
+    login_as(current_user, scope: :user)
     visit edit_organisation_employee_path(org, existing_employee)
-    expect(page).to have_selector 'h3', text: existing_employee.name
+    expect(page).to have_selector 'h3', text: /#{existing_employee.name}/i
 
-    click_on t('employees.edit.skills_interests')
-    add_tags_to_selectize '#employee_experience_list', with: ['Hello', 'World']
+    find('a', text: t('components.profile.skills_interests')).click
+    add_tags_to_selectize '#employee_experience_list', with: %w(Hello World), create: true
 
-    click_button 'Save'
-    expect(find_field('#employee_experience_list').value).to match_array ['Hello', 'World']
+    find('button', text: /Save/i)
+    expect(select_value_of '#employee_experience_list').to match_array %w(Hello World)
   end
 end

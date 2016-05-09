@@ -27,7 +27,7 @@ section
           td 
             = user.name
           td = user.email
-          td = user.role_form
+          td = user.role_form unless user.pending_invite?
           td = user.remove_link unless user.owner?
   = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary centered'
     span.icon +

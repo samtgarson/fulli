@@ -69,6 +69,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-email (2.5.0)
+      capybara (~> 2.4)
+      mail
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cliver (0.3.2)
@@ -162,6 +165,9 @@ GEM
       sass (>= 3.3)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    orderly (0.0.3)
+      capybara (>= 1.1)
+      rspec (>= 2.14)
     orm_adapter (0.5.0)
     paperclip (4.3.6)
       activemodel (>= 3.2.0)
@@ -238,6 +244,10 @@ GEM
     roadie-rails (1.1.0)
       railties (>= 3.0, < 4.3)
       roadie (~> 3.1)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -325,6 +335,7 @@ DEPENDENCIES
   aws-sdk
   bourbon
   capybara
+  capybara-email
   cocoon (~> 1.2.0)
   coffee-rails (~> 4.1.0)
   database_cleaner
@@ -340,6 +351,7 @@ DEPENDENCIES
   kaminari
   launchy
   neat
+  orderly
   paperclip
   pg (~> 0.15)
   pg_search

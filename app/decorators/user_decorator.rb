@@ -31,11 +31,11 @@ class UserDecorator < Draper::Decorator
 
   def remove_link
     if user.pending_invite?
-      helpers.link_to context.user_path(object), method: :delete, remote: true do
+      helpers.button_to context.user_path(object), method: :delete do
         helpers.content_tag :span, 'b', class: 'icon'
       end
     else
-      helpers.link_to context.remove_user_organisation_path(user_id: slug), method: :delete, remote: true do
+      helpers.button_to context.remove_user_organisation_path(user_id: slug), method: :delete do
         helpers.content_tag :span, 'b', class: 'icon'
       end
     end
