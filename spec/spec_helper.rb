@@ -1,5 +1,13 @@
+require 'simplecov'
 require 'coveralls'
-Coveralls.wear!('rails')
+
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start 'rails' do
+  add_group 'Decorators', 'app/decorators'
+  add_group 'Services', 'app/services'
+  groups.delete 'Libraries'
+  groups.delete 'Jobs'
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
