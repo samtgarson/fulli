@@ -5,4 +5,8 @@ module AccountHelpers
     fill_in 'Password', with: 'password'
     click_button 'Log in'
   end
+
+  def last_email
+    ActionMailer::Base.deliveries.last
+  end
 end

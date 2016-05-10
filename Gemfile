@@ -30,17 +30,10 @@ gem 'slugify'
 gem 'uglifier', '>= 1.3.0'
 gem 'virtus'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-particles.js'
-  gem 'rails-assets-rangeslider.js'
-  gem 'rails-assets-five-star-rating'
-end
-
 gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'capybara'
-  gem 'capybara-email'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'

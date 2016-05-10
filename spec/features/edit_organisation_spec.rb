@@ -78,14 +78,13 @@ RSpec.feature 'Editing an organisation' do
 
     expect(page).to have_selector 'h2', text: t('devise.invitations.new.title', name: org.name)
 
-    clear_emails
     fill_in 'Email', with: new_user.email
     fill_in 'Name', with: new_user.name
     click_button t('devise.invitations.new.submit_button')
     expect(page).to have_selector 'td', text: new_user.name
 
-    open_email new_user.email
-    current_email.click_link t('devise.mailer.invitation_instructions.accept')
+    click_link t('nav.log_out')
+    visit accept_user_invitation_url(invitation_token: last_email.body.match(/invitation_token=(\w*)/)[1])
 
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
