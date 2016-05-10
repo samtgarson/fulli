@@ -3,7 +3,7 @@ module NavHelper
     content_tag :ul, id: 'nav' do
       nav_links.map do |k, v|
         content_tag :li, class: ('active' if current_page?(v[:path])) do
-          link_to t("nav.#{k}"), v[:path], v[:options]
+          link_to v[:raw] ? k : t("nav.#{k}"), v[:path], v[:options]
         end
       end.join(' ').html_safe
     end
@@ -18,8 +18,8 @@ module NavHelper
   def user_nav
     {
       orgs: { path: organisations_path },
-      :"#{current_user.name}" => { path: edit_user_registration_path },
-      logout: { path: destroy_user_session_path, options: { method: :delete } }
+      :"#{current_user.name}" => { path: edit_user_registration_path, raw: true },
+      log_out: { path: destroy_user_session_path, options: { method: :delete } }
     }
   end
 

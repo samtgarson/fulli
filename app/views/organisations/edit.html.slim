@@ -18,16 +18,16 @@ section
         th Role
         th
       - organisation.users.each do |user|
-        tr class=('faded' if user.has_pending_invite?) data-id=user.id
+        tr class=('faded' if user.pending_invite?) data-id=user.id
           td.avatar 
-            - if user.has_pending_invite?
+            - if user.pending_invite?
               span.icon m
             - else
               = image_tag(user.avatar.url)
           td 
             = user.name
           td = user.email
-          td = user.role_form
+          td = user.role_form unless user.pending_invite?
           td = user.remove_link unless user.owner?
   = link_to new_user_invitation_path(organisation_id: organisation.slug), class: 'btn secondary centered'
     span.icon +

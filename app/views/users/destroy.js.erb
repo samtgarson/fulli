@@ -1,1 +1,5 @@
-$('[data-id=<%= @id %>]').remove()
+if ('<%= @id %>' == '<% current_user.id %>') {
+  location.href = 
+}
+
+  $('[data-id=<%= @id %>]').remove()

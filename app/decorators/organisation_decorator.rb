@@ -1,6 +1,6 @@
 class OrganisationDecorator < Draper::Decorator
   delegate_all
-  
+
   def transfer_options
     helpers.options_from_collection_for_select transfer_users, 'id', 'name'
   end
@@ -12,5 +12,4 @@ class OrganisationDecorator < Draper::Decorator
   def users
     object.users.decorate context: context
   end
-
 end

@@ -13,3 +13,6 @@
 /tmp
 /public/system
 .env
+/spec/examples.txt
+.rubocop-https---*
+coverage

@@ -50,15 +50,18 @@ class OrganisationsController < ApplicationController
 
   def remove_user
     @id = selected_user.id
-    organisation.users.delete(selected_user)
-    selected_user.organisations.delete(organisation)
-    render 'users/destroy'
+    Association.find_by(user_id: selected_user.id, organisation_id: organisation.id).destroy
+
+    respond_to do |format|
+      format.js { render 'users/destroy' }
+      format.html { redirect_to selected_user == current_user ? organisations_path : edit_organisation_path(organisation) }
+    end
   end
 
   def transfer
     from = organisation.associations.find_by role: 'owner'
     to = organisation.associations.find_by user_id: params[:user_id]
-    from.update_attributes(role: 'admin') 
+    from.update_attributes(role: 'admin')
     to.update_attributes(role: 'owner')
 
     flash[:notice] = "#{organisation.name} transferred successfully."
@@ -76,16 +79,14 @@ class OrganisationsController < ApplicationController
   private
 
   def record_event
-    Heap.event('Perform filter', current_user.email, clean_search_params )
+    Heap.event('Perform filter', current_user.email, clean_search_params)
   end
 
   def clean_search_params
-    params.permit(:query, {
-      experience: [],
-      projects: [],
-      interests: [],
-      skills: []
-    }).symbolize_keys.each_with_object({}) { |(k,v), sum| sum[k] = v.to_s }
+    params.permit(:query,                     experience: [],
+                                              projects: [],
+                                              interests: [],
+                                              skills: []).symbolize_keys.each_with_object({}) { |(k, v), sum| sum[k] = v.to_s }
   end
 
   def selected_user

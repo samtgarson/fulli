@@ -13,8 +13,8 @@ class EmployeeSearchDecorator < Draper::Decorator
   end
 
   def path_options(attribute)
-    context.params.permit(object.class.allowed_params)
-    .tap do |h|
+    context.params.permit(object.class.allowed_params).
+      tap do |h|
       h[:order] = attribute
       h[:reverse] = order == attribute && reverse == 0 ? 1 : 0
       h[:format] = :js

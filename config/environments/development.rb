@@ -19,7 +19,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
 
-  config.roadie.url_options = { host: "localhost", scheme: "http", port: 3000 }
+  config.roadie.url_options = { host: 'localhost', scheme: 'http', port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -42,7 +42,7 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  config.action_view.raise_on_missing_translations = true
   # config.paperclip_defaults = {
   #   storage: :s3,
   #   s3_credentials: {

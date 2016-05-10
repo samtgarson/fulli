@@ -1,0 +1,9 @@
+dependencies:
+  pre:
+    - cp .env.test .env
+    - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: fulli
