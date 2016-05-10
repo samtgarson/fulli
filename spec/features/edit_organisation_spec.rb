@@ -72,19 +72,14 @@ RSpec.feature 'Editing an organisation' do
   end
 
   scenario 'can invite a new user who will automagically join' do
-    current_user.organisations << org
-    current_user.promote_to org, 'owner'
-    visit new_user_invitation_path(organisation_id: org.slug)
-
-    expect(page).to have_selector 'h2', text: t('devise.invitations.new.title', name: org.name)
-
-    fill_in 'Email', with: new_user.email
-    fill_in 'Name', with: new_user.name
-    click_button t('devise.invitations.new.submit_button')
-    expect(page).to have_selector 'td', text: new_user.name
-
     click_link t('nav.log_out')
-    visit accept_user_invitation_url(invitation_token: last_email.body.match(/invitation_token=(\w*)/)[1])
+
+    email = new_user.invite!
+    new_user.organisations << org
+    token = email.body.match(/invitation_token=(\w*)/)[1]
+    visit accept_user_invitation_url(invitation_token: token)
+
+    expect(page).to have_selector 'h2', text: "Join #{org.name}"
 
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'

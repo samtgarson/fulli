@@ -1,14 +1,3 @@
-require 'simplecov'
-require 'coveralls'
-
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-SimpleCov.start 'rails' do
-  add_group 'Decorators', 'app/decorators'
-  add_group 'Services', 'app/services'
-  groups.delete 'Libraries'
-  groups.delete 'Jobs'
-end
-
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
