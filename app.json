@@ -1,0 +1,58 @@
+{
+  "name": "fulli",
+  "scripts": {
+    "postDeploy": "bundle exec rake db:setup"
+  },
+  "env": {
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "CONTACT_EMAIL": {
+      "required": true
+    },
+    "HEAP_ID": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "S3_BUCKET_NAME": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "SENDGRID_DOMAIN": {
+      "required": true
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1
+    },
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "sendgrid"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
