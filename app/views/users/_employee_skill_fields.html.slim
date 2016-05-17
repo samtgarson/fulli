@@ -1,4 +1,4 @@
 .skill-wrapper
   = f.input :skill, collection: Skill.all.map(&:name), input_html: { class: 'basic-tags', data: {options: {selectize: {maxItems: 1}}} }, wrapper_html: { class: 'select selectize-wrapper' }
   = f.input :rating, as: :integer, wrapper_html: { class: 'star-rating' }
-  = link_to_remove_association('b', f, wrapper_class: 'skill-wrapper', class: 'secondary btn icon') if @admin
+  = link_to_remove_association('b', f, wrapper_class: 'skill-wrapper', class: 'secondary btn icon')

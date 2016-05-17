@@ -16,11 +16,12 @@ module NavHelper
   end
 
   def user_nav
-    {
-      orgs: { path: organisations_path },
-      :"#{current_user.name}" => { path: edit_user_registration_path, raw: true },
-      log_out: { path: destroy_user_session_path, options: { method: :delete } }
-    }
+    {}.tap do |h|
+      h[current_user.organisation.name] = { path: organisation_path(current_user.organisation), raw: true } if current_user.organisation.present?
+      h[current_user.name] = { path: edit_user_path(current_user), raw: true } if current_user.onboarded_at?
+      h[:account] = { path: edit_user_registration_path }
+      h[:log_out] = { path: destroy_user_session_path, options: { method: :delete } }
+    end
   end
 
   def anon_nav

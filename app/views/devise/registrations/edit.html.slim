@@ -1,5 +1,6 @@
 = render layout: 'components/profile', locals: { user: current_user }
-  h2 Your Account
+  h2 = t '.account'
+
 section
   = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     .form-inputs

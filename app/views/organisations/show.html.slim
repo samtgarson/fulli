@@ -13,7 +13,4 @@ section
     #employee-table
       = render 'organisations/list', obj: @search
   - if @admin
-    = link_to new_organisation_employee_path(organisation), class: 'btn', id: 'new-employee'
-      span.icon +
-      | Add a new employee
     = link_to "Edit #{organisation.name}", edit_organisation_path(organisation), class: 'btn secondary'

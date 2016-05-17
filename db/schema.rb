@@ -11,47 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430130834) do
+ActiveRecord::Schema.define(version: 20160516135800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "associations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string "role",            default: "false"
-    t.uuid   "user_id"
-    t.uuid   "organisation_id"
-  end
-
-  add_index "associations", ["organisation_id"], name: "index_associations_on_organisation_id", using: :btree
-  add_index "associations", ["user_id", "organisation_id"], name: "index_associations_on_user_id_and_organisation_id", unique: true, using: :btree
-  add_index "associations", ["user_id"], name: "index_associations_on_user_id", using: :btree
-
   create_table "employee_skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.integer  "rating",      default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "rating",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.uuid     "skill_id"
-    t.uuid     "employee_id"
+    t.uuid     "user_id"
   end
-
-  create_table "employees", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "date_joined"
-    t.string   "title"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.uuid     "organisation_id"
-    t.string   "ancestry"
-    t.string   "slug"
-    t.integer  "ancestry_depth",      default: 0
-  end
-
-  add_index "employees", ["ancestry"], name: "index_employees_on_ancestry", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -138,12 +110,21 @@ ActiveRecord::Schema.define(version: 20160430130834) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.datetime "date_joined"
+    t.string   "title"
+    t.string   "ancestry"
+    t.integer  "ancestry_depth",         default: 0
+    t.string   "role"
+    t.uuid     "organisation_id"
+    t.datetime "onboarded_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+  add_index "users", ["organisation_id"], name: "index_users_on_organisation_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "users", "organisations"
 end

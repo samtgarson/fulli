@@ -1,31 +1,81 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  let(:org) { FactoryGirl.create :organisation }
-  let(:other_org) { FactoryGirl.create :organisation }
-  let(:user) { FactoryGirl.create :user }
-  let(:association) { Association.create user: user, organisation: org }
-  let!(:other_association) { Association.create user: user, organisation: other_org }
+  describe '.has_tags' do
+    let(:users) { FactoryGirl.create_list(:user, 3) }
+    let(:experienced_user) { users.first }
+    let(:interested_user) { users.last }
 
-  describe '#admin_of?' do
     before do
-      association.update_attributes role: 'admin'
+      experienced_user.update_attributes experience_list: ['Health']
+      interested_user.update_attributes interest_list: ['Health']
     end
 
-    it 'returns the correct value' do
-      expect(user.admin_of? org).to be_truthy
-      expect(user.admin_of? other_org).not_to be_truthy
+    context 'given a tag' do
+      it 'returns the tagged members with a scope' do
+        expect(User.has_tags 'Health', :experiences).to match_array [experienced_user]
+      end
+
+      it 'returns the tagged members with no scope' do
+        expect(User.has_tags 'Health').to match_array [experienced_user, interested_user]
+      end
+    end
+
+    context 'with no tag' do
+      it 'returns all members' do
+        expect(User.has_tags '').to match_array users
+      end
     end
   end
 
-  describe '#owner_of?' do
-    before do
-      association.update_attributes role: 'owner'
+  describe 'validations' do
+    subject { FactoryGirl.create :user }
+
+    context 'before onboarding' do
+      it 'is valid with basics' do
+        expect(subject).to be_valid
+      end
+
+      it 'is invalid without email or name' do
+        subject.name = nil
+        subject.email = ''
+        expect(subject).not_to be_valid
+      end
     end
 
-    it 'returns the correct value' do
-      expect(user.owner_of? org).to be_truthy
-      expect(user.owner_of? other_org).not_to be_truthy
+    context 'after onboarding' do
+      it 'is invalid with the basics' do
+        subject.onboarded_at = DateTime.current
+        expect(subject).not_to be_valid
+      end
+
+      it 'is valid with employement details' do
+        subject.update_attributes FactoryGirl.attributes_for :user, :onboarded
+        expect(subject).to be_valid
+      end
+    end
+
+    context 'with no skills' do
+      it 'has an empty employee skill' do
+        expect(subject.employee_skills.size).to be 1
+        expect(subject.employee_skills.first.skill).to be_nil
+        expect(subject.employee_skills.first.rating).to be 0
+      end
+
+      it 'is valid' do
+        expect(subject).to be_valid
+      end
+    end
+
+    context 'with invalid employee skills' do
+      before do
+        subject.employee_skills.create rating: 4
+        subject.employee_skills.create skill: 'Health'
+      end
+
+      it 'is invalid' do
+        expect(subject).not_to be_valid
+      end
     end
   end
 end

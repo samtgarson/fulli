@@ -1,5 +1,5 @@
 class EmployeeSkill < ActiveRecord::Base
-  belongs_to :employee, inverse_of: :employee_skills
+  belongs_to :user, inverse_of: :employee_skills
   belongs_to :skill, inverse_of: :employee_skills
 
   validates :skill, presence: true, if: 'rating > 0'

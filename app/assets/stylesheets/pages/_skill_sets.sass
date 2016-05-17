@@ -1,6 +1,14 @@
 .skill-wrapper
   +clearfix
 
+  &:not(:first-of-type)
+    label
+      display: none
+
+  &:not(:last-of-type)
+    .input
+      margin-bottom: -10px
+
   .input.select
     +span-columns(7)
     height: 50px

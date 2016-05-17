@@ -1,6 +1,6 @@
 class Skill < ActiveRecord::Base
   has_many :employee_skills, inverse_of: :skill
-  has_many :employees, through: :employee_skill, inverse_of: :skills
+  has_many :users, through: :employee_skill, inverse_of: :skills
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
@@ -17,9 +17,9 @@ class Skill < ActiveRecord::Base
     end
 
     def generate_slug_for(name)
-      name.
-        gsub(' and ', ' ').
-        slugify(true)
+      name
+        .gsub(' and ', ' ')
+        .slugify(true)
     end
   end
 end

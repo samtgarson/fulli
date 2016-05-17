@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EmployeeSearch do
+RSpec.describe UserSearch do
   attr_list = [
     {
       name: 'Homer',
@@ -24,7 +24,7 @@ RSpec.describe EmployeeSearch do
 
   let(:org) { FactoryGirl.create :organisation }
   attr_list.each do |attrs|
-    let!(attrs[:name].downcase.to_sym) { FactoryGirl.create(:employee, { organisation_id: org.id }.merge(attrs)) }
+    let!(attrs[:name].downcase.to_sym) { FactoryGirl.create(:user, :onboarded, :confirmed, { organisation_id: org.id }.merge(attrs)) }
   end
 
   describe '.results' do
@@ -68,9 +68,9 @@ RSpec.describe EmployeeSearch do
 
     test_list.each do |test|
       context test[:desc] do
-        let(:search) { EmployeeSearch.new(test[:args].merge(id: org.id)) }
+        let(:search) { UserSearch.new(test[:args].merge(id: org.id)) }
 
-        it 'returns the correct employees in the correct order' do
+        it 'returns the correct users in the correct order' do
           expect(search.results).to eq test[:result].map { |m| public_send m }
         end
       end

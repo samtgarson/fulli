@@ -31,7 +31,7 @@ module ApplicationHelper
       select_tag key, options_for_select(options[:options]),
         multiple: true,
         class: 'basic-tags',
-        placeholder: t("simple_form.labels.employee.#{options[:placeholder]}"),
+        placeholder: t("simple_form.labels.user.#{options[:placeholder]}"),
         disabled: (params[:display] == 'graph'),
         data: { options: {
           selectize: {

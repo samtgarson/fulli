@@ -1,7 +1,5 @@
 class Organisation < ActiveRecord::Base
-  has_many :employees, dependent: :destroy
-  has_many :users, through: :associations
-  has_many :associations, dependent: :destroy
+  has_many :users, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :url, format: { with: URI.regexp }, allow_blank: true
@@ -19,6 +17,6 @@ class Organisation < ActiveRecord::Base
   end
 
   def top_employees
-    employees.order(:name).limit(5)
+    users.order(:name).limit(5)
   end
 end
