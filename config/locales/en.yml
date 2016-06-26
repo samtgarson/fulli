@@ -2,6 +2,7 @@ en:
   nav: 
     home: Home
     orgs: Organisations
+    profile: Edit Profile
     account: Account
     log_in: Log In
     sign_up: Sign Up
@@ -9,16 +10,22 @@ en:
   flashes:
     not_authorized: You are not authorized to access that page.
     not_member: You are not part of that organisation.
+    something_wrong: Something went wrong. Please try again.
+    success: Your profile is successfully updated.
   views:
     pagination:
       previous: ←
       next: →
   simple_form:
     labels:
-      employee:
-        title: Position
-        avatar: Profile Picture
-        parent_id: Direct Manager
+      organisation:
+        name: Organisation Name
+        url: URL (Optional)
+      user:
+        name: Full Name
+        title: Job Title
+        avatar: Change Profile Picture
+        parent_id: Line Manager
         experience_list: Previous Experience
         interest_list: Interests
         project_list: Past Projects
@@ -32,8 +39,13 @@ en:
       empty_admin: '%{name} has no employees yet, add one to get started'
   components:
     profile:
-      summary: Summary
-      skills_interests: Skills & Interests
+      account: Account
+      summary: Edit Summary
+      skills_interests: Edit Skills & Interests
+  users:
+    form:
+      choose_manager: Choose your line manager
+      no_managers: Come back when your coworkers have joined Fulli!
   datetime:
     distance_in_words:
       about_x_hours:

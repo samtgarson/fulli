@@ -7,29 +7,35 @@ class Listeners.Table extends Listener
 
   _bindEvents: =>
     reloading = false
-    $(document).on('table:reload', (e, body, display) =>
-      return true if reloading
-      reloading = true
-      bod = $(body).hide()
-
-      if @displayHasChanged(display)
-        @el.empty().stop().animate({
-          height: getHeight(body)
-        }, 200, =>
-          bod.appendTo(@el).fadeIn()
-          Listener.bindAll()
-          @_bindClick()
-          reloading = false
-        )
-      else
-        @el.empty().append(bod.show())
-        Listener.bindAll()
-        @_bindClick()
-        reloading = false
-    )
+    $(document)
+      .on('table:reload', @replaceTable)
+      .on('table:reloadRow', @replaceRow)
 
   displayHasChanged: (display) =>
     $('.filter-toggle.active').data('filter-toggle') != display
+
+  replaceRow: (e, body, id) =>
+    @el.find('tr[data-id=' + id + ']').replaceWith body 
+
+  replaceTable: (e, body, display) =>
+    return true if reloading
+    reloading = true
+    bod = $(body).hide()
+
+    if @displayHasChanged(display)
+      @el.empty().stop().animate({
+        height: getHeight(body)
+      }, 200, =>
+        bod.appendTo(@el).fadeIn()
+        Listener.bindAll()
+        @_bindClick()
+        reloading = false
+      )
+    else
+      @el.empty().append(bod.show())
+      Listener.bindAll()
+      @_bindClick()
+      reloading = false
 
   _bindClick: =>
     @el.find('tr[data-link]').each ->

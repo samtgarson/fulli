@@ -1,23 +1,18 @@
 class OrganisationsController < ApplicationController
-  skip_before_action :check_access_to_org, only: [:new, :create, :index]
-  skip_before_action :set_admin, only: [:index, :new, :create]
-  before_action :only_admins!, except: [:index, :new, :create, :show]
-
-  def index
-    @organisations = current_user.organisations.page(page)
-  end
+  skip_before_action :set_admin, only: [:new, :create]
+  skip_before_action :check_org, only: [:new, :create]
+  skip_before_action :check_attributes, only: [:new, :create]
+  before_action :only_admins!, except: [:new, :create, :show]
 
   def new
-    back 'Organisations', organisations_path
   end
 
   def create
-    @organisation = current_user.organisations.create(org_params)
+    @organisation = Organisation.create(org_params)
     if @organisation.valid?
-      current_user.associations.find_by(organisation: @organisation).update_attributes role: 'owner'
-      redirect_to new_organisation_employee_path(@organisation)
+      current_user.update_attributes role: 'owner', organisation: @organisation
+      redirect_to organisation_path(@organisation)
     else
-      back 'Organisations', organisations_path
       render :new
     end
   end
@@ -37,20 +32,19 @@ class OrganisationsController < ApplicationController
   end
 
   def show
-    back 'Organisations', organisations_path
     params[:display] ||= 'table'
     case params[:display]
     when 'table'
       record_event
-      @search = EmployeeSearch.new(params.permit EmployeeSearch.allowed_params).decorate context: self
+      @search = UserSearch.new(params.merge(id: organisation.id).permit UserSearch.allowed_params).decorate context: self
     when 'graph'
-      @graph = OrganisationGraph.new organisation.employees, context: self
+      @graph = OrganisationGraph.new organisation.users, context: self
     end
   end
 
   def remove_user
     @id = selected_user.id
-    Association.find_by(user_id: selected_user.id, organisation_id: organisation.id).destroy
+    selected_user.update_attributes organisation_id: nil, role: nil
 
     respond_to do |format|
       format.js { render 'users/destroy' }
@@ -59,8 +53,8 @@ class OrganisationsController < ApplicationController
   end
 
   def transfer
-    from = organisation.associations.find_by role: 'owner'
-    to = organisation.associations.find_by user_id: params[:user_id]
+    from = organisation.users.find_by role: 'owner'
+    to = organisation.users.object.find params[:user_id]
     from.update_attributes(role: 'admin')
     to.update_attributes(role: 'owner')
 
@@ -83,14 +77,14 @@ class OrganisationsController < ApplicationController
   end
 
   def clean_search_params
-    params.permit(:query,                     experience: [],
-                                              projects: [],
-                                              interests: [],
-                                              skills: []).symbolize_keys.each_with_object({}) { |(k, v), sum| sum[k] = v.to_s }
+    params.permit(:query, experience: [],
+                          projects: [],
+                          interests: [],
+                          skills: []).symbolize_keys.each_with_object({}) { |(k, v), sum| sum[k] = v.to_s }
   end
 
   def selected_user
-    User.friendly.find(params[:user_id])
+    @selected_user ||= User.friendly.find(params[:user_id])
   end
 
   def org_params

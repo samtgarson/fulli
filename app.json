@@ -1,7 +1,7 @@
 {
   "name": "fulli",
   "scripts": {
-    "postDeploy": "bundle exec rake db:setup"
+    "postdeploy": "bundle exec rake db:setup"
   },
   "env": {
     "AWS_ACCESS_KEY_ID": {

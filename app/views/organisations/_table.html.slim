@@ -12,14 +12,13 @@
         th = obj.sort_link_for 'Joined', 'date_joined'
       th
     - obj.results.each do |e|
-        tr data-link=organisation_employee_path(organisation, e)
+        tr
           td.avatar = image_tag(e.avatar)
-          td = link_to e.name, organisation_employee_path(organisation, e)
+          td = e.name
           - if params[:skills]
             td.star-rating.disabled = number_field_tag :rating, e.rating_for_skill(obj.skill)
           - else 
             td = e.title
             td = time_ago_in_words(e.date_joined).titleize + ' ago'
           td
-            span.hover.icon →
   = paginate obj.results, remote: true

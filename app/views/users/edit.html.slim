@@ -1,0 +1,24 @@
+= render layout: 'components/profile', locals: { user: @selected_user }
+  h2.toggle
+    a> data-tab-target=0 = t '.summary'
+    a> data-tab-target=1 = t '.skills_interests'
+
+section.tabs
+  .tab-wrapper
+    .tab data-tab=0
+      = render 'form'
+    .tab data-tab=1
+      = simple_form_for @selected_user, html: { method: :put } do |f|
+        = f.input :experience_list, basic_tag_options(@selected_user.experience_list)
+        = f.input :interest_list, basic_tag_options(@selected_user.interest_list)
+        = f.input :project_list, basic_tag_options(@selected_user.project_list)
+        hr /
+        .skills-fields
+          = f.simple_fields_for :employee_skills do |e|
+            = render partial: 'employee_skill_fields', locals: {f: e}
+        = f.button :button
+          span.icon t
+          | save
+        = link_to_add_association f, :employee_skills, class: 'btn secondary spacer', data: { association_insertion_node: '.skills-fields', association_insertion_method: 'append' }
+          span.icon +
+          | Add Skill

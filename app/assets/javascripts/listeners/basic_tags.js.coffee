@@ -14,7 +14,7 @@ class Listeners.BasicTags extends Listener
       dropdownParent: 'body'
 
 $ =>
-  $('.edit_employee').on('cocoon:after-insert', => 
+  $('.edit_user').on('cocoon:after-insert', ->
     Listeners.BasicTags.bindSelf()
     Listeners.StarRating.bindSelf()
     Listeners.Tabs.instances[0].updateHeight()

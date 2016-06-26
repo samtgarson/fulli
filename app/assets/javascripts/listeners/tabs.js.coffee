@@ -7,6 +7,9 @@ class Listeners.Tabs extends Listener
     @tabs = $('.tab')
     @activeTab = 0
 
+    # @wrapper.css('position', 'fixed')
+    # setTimeout (=> @wrapper.css('position', 'absolute')), 0
+
     @_bindClicks()
     @gotoTab(@activeTab)
 

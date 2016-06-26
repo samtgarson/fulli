@@ -1,0 +1,2 @@
+<% flash %>
+$('body').trigger('table:reloadRow', ['<%= j(render 'organisations/user_row', user: @selected_user) %>', '<%= @selected_user.id %>'])
