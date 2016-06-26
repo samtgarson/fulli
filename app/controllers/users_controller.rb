@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :check_attributes, only: [:edit, :update]
-  skip_before_action :set_admin
+  skip_before_action :set_admin, except: :destroy
   before_action :only_admins!, only: :destroy
 
   def edit
@@ -11,20 +11,18 @@ class UsersController < ApplicationController
     redirect_to root_path and return if request.format.html? && selected_user != current_user
     back organisation.name, organisation_path(organisation)
     first_time = selected_user.onboarded_at.nil?
+    selected_user.update_attributes(user_params)
 
-    if selected_user.update_attributes(user_params)
-      flash[:notice] = 'Your profile is successfully updated.'
+    if selected_user.valid?
+      flash[:notice] = I18n.t('flashes.success')
+      redirect_to organisation_path(selected_user.organisation) and return if first_time
     else
-      flash[:alert] = 'Something went wrong. Please try again.'
+      flash[:alert] = I18n.t('flashes.something_wrong')
     end
 
-    if first_time
-      redirect_to organisation_path(selected_user.organisation)
-    else
-      respond_to do |format|
-        format.html { render :edit }
-        format.js
-      end
+    respond_to do |format|
+      format.html { render :edit }
+      format.js
     end
   end
 

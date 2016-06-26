@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
 
   friendly_id :slug_candidates, use: :slugged
 
-  validates :name, :email, presence: true
-  validates :title, :date_joined, presence: true, if: :onboarded_at?
+  validates :name, :email, :avatar, presence: true
+  validates :title, :date_joined, presence: { allow_blank: false }, if: :onboarded_at?
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
   validates_associated :employee_skills
 
@@ -94,6 +94,6 @@ class User < ActiveRecord::Base
   private
 
   def add_empty_skill
-    employee_skills << EmployeeSkill.new if employee_skills.empty?
+    employee_skills << EmployeeSkill.new while employee_skills.count < 2
   end
 end

@@ -18,8 +18,8 @@ module NavHelper
   def user_nav
     {}.tap do |h|
       h[current_user.organisation.name] = { path: organisation_path(current_user.organisation), raw: true } if current_user.organisation.present?
-      h[current_user.name] = { path: edit_user_path(current_user), raw: true } if current_user.onboarded_at?
-      h[:account] = { path: edit_user_registration_path }
+      h[:profile] = { path: edit_user_path(current_user) } if current_user.onboarded_at?
+      h[current_user.name] = { path: edit_user_registration_path, raw: true }
       h[:log_out] = { path: destroy_user_session_path, options: { method: :delete } }
     end
   end

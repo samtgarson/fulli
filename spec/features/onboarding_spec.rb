@@ -18,6 +18,26 @@ RSpec.feature 'During onboarding' do
     expect(page).to have_selector 'h2', text: org_attributes[:name]
   end
 
+  scenario 'the user must fill in required fields' do
+    log_in_user
+    expect(page).to have_selector 'h2', text: 'New Organisation'
+
+    fill_in_org_form
+    expect(page).to have_selector 'h2', text: t('components.profile.summary')
+
+    fill_in 'Name', with: user_attributes[:name]
+    select_date user_attributes[:date_joined], from: 'user_date_joined'
+    click_button 'Save'
+    expect(page).to have_selector '.flash', text: I18n.t('flashes.something_wrong')
+
+    click_button 'Save'
+    expect(page).to have_selector '.flash', text: I18n.t('flashes.something_wrong')
+
+    fill_in I18n.t('simple_form.labels.user.title'), with: user_attributes[:title]
+    click_button 'Save'
+    expect(page).to have_selector 'h2', text: org_attributes[:name]
+  end
+
   scenario 'the user can go back and edit their profile', js: true do
     current_user.update_attributes user_attributes
     login_as(current_user, scope: :user)
@@ -40,16 +60,15 @@ RSpec.feature 'During onboarding' do
   end
 
   def fill_in_org_form
-    fill_in 'Name', with: org_attributes[:name]
-    fill_in 'Url', with: org_attributes[:url]
+    fill_in I18n.t('simple_form.labels.organisation.name'), with: org_attributes[:name]
+    fill_in I18n.t('simple_form.labels.organisation.url'), with: org_attributes[:url]
     click_button 'Create Organisation'
   end
 
   def fill_in_profile_form
-    fill_in 'Name', with: user_attributes[:name]
-    fill_in 'Position', with: user_attributes[:title]
+    fill_in I18n.t('simple_form.labels.user.name'), with: user_attributes[:name]
+    fill_in I18n.t('simple_form.labels.user.title'), with: user_attributes[:title]
     select_date user_attributes[:date_joined], from: 'user_date_joined'
-    attach_file 'Profile Picture', "#{Rails.root}/public/avatars/original/missing.png"
     click_button 'Save'
   end
 end

@@ -2,12 +2,14 @@ class UserDecorator < Draper::Decorator
   delegate_all
 
   def parent_selector_options
+    possible_parents = helpers.organisation.top_employees.all_except(id)
     {
       class: 'humans',
+      placeholder: possible_parents.any? ? helpers.t('.choose_manager') : helpers.t('.no_managers'),
       data: {
         options: {
           selectize: {
-            options: helpers.organisation.top_employees.all_except(id).as_json,
+            options: possible_parents.as_json,
             items: [(parent.id if parent)]
           },
           ajax: {

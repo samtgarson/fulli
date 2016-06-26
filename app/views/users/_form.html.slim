@@ -7,7 +7,6 @@
     order: [:day, :month, :year], 
     start_year: Date.today.year - 50,
     end_year: Date.today.year
-  = f.input(:avatar, as: :file)
   - if @selected_user.organisation.users.any?
     = f.input :parent_id, collection: {}, 
       input_html: @selected_user.parent_selector_options, 
@@ -15,4 +14,5 @@
   = f.button :button
     span.icon t
     |Save
-  = f.input(:onboarded_at, as: :hidden, input_html: { value: DateTime.now }) if @selected_user.onboarded_at.nil?
+  = f.input(:onboarded_at, as: :hidden, input_html: { value: DateTime.now }) if @selected_user.onboarded_at.nil? || !@selected_user.valid?
+

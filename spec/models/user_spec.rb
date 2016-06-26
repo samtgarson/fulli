@@ -57,7 +57,7 @@ RSpec.describe User do
 
     context 'with no skills' do
       it 'has an empty employee skill' do
-        expect(subject.employee_skills.size).to be 1
+        expect(subject.employee_skills.size).to be 2
         expect(subject.employee_skills.first.skill).to be_nil
         expect(subject.employee_skills.first.rating).to be 0
       end

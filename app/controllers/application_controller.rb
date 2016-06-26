@@ -38,13 +38,13 @@ class ApplicationController < ActionController::Base
 
   def check_org
     return unless user_signed_in? && current_user.organisation_id.nil?
-    flash[:notice] = 'You need to create your profile before doing that.'
+    flash[:notice] = 'You need to create an organisation before doing that.'
     redirect_to(new_organisation_path, status: 303)
   end
 
   def check_attributes
     return unless user_signed_in? && current_user.onboarded_at.nil?
-    flash[:notice] = 'You need to create an organisation before doing that.'
+    flash[:notice] = 'You need to create your profile before doing that.'
     redirect_to(edit_user_path(current_user), status: 303)
   end
 
